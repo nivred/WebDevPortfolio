@@ -1,0 +1,135 @@
+/*** BEGIN RESET CSS STYLING ***/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*** END RESET CSS STYLING ***/
+
+/*** BEGIN PORTFOLIO STYLING ***/
+body {
+    background-color: #171717;
+    color: aliceblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+h3 {
+    color: #DADFFF;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.3em;
+    margin-bottom: 3px;
+}
+
+p {
+    font-size: .8em;
+    line-height: 1.3em;
+    margin-bottom: 5px;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 998px;
+}
+
+#main-content {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 100px auto;
+}
+
+.direction-arrow {
+    display: inline-block;
+    padding: 80px 10px 0 10px;
+}
+
+#slider-container {
+    height: 400px;
+    overflow: hidden;
+}
+
+.project-content {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 20px;
+}
+
+.thumbnails {
+    /* background-color: coral; */ /* spacing problem */
+    display: flex;
+    flex-flow: row wrap;
+    width: 400px;
+}
+
+.thumbnail-lg {
+    margin-bottom: 5px;
+}
+
+.thumbnail-sm2 {
+    margin-left: 10px;
+}
+
+.project-detail {
+    margin-left: 18px;
+    width: 400px;
+    position: relative;
+}
+
+.subNav {
+    position: absolute;
+    bottom: 12px;
+}
+
+.subNav a {
+    border: 1px solid coral;
+    border-radius: 25px;
+    color: coral;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.subNav a:hover {
+    background-color: coral;
+    color: white;
+    font-weight: 300;
+}
+/*** END PORTFOLIO STYLING ***/
