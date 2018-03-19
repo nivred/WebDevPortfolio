@@ -47,17 +47,25 @@ table {
 /*** BEGIN PORTFOLIO STYLING ***/
 body {
     background-color: #171717;
+    background: url(../img/background.jpg) no-repeat;
     color: aliceblue;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
 
+h2, h3 {
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+h2 {
+    color: coral;
+}
+
 h3 {
     color: #DADFFF;
     font-size: 1em;
-    font-weight: 600;
     line-height: 1.3em;
-    margin-bottom: 3px;
 }
 
 p {
@@ -79,6 +87,17 @@ p {
 
 .direction-arrow {
     display: inline-block;
+    opacity: 0.2;
+        filter: Alpha(opacity=20); /* IE8 and earlier */
+    padding: 80px 10px 0 10px;
+}
+
+.direction-arrow:hover {
+    display: inline-block;
+    opacity: 1.0;
+        filter: Alpha(opacity=100); /* IE8 and earlier */
+    transition: opacity 500ms;
+        -webkit-transition: opacity 500ms; /* Safari 3.1 to 6.0 */
     padding: 80px 10px 0 10px;
 }
 
@@ -100,12 +119,16 @@ p {
     width: 400px;
 }
 
+.thumbnails img {
+    border: 1px solid ghostwhite;
+}
+
 .thumbnail-lg {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .thumbnail-sm2 {
-    margin-left: 10px;
+    margin-left: 6px;
 }
 
 .project-detail {
@@ -114,14 +137,18 @@ p {
     position: relative;
 }
 
+.spacer {
+    margin: 0 10px;
+}
+
 .subNav {
     position: absolute;
-    bottom: 12px;
+    bottom: 14px;
 }
 
 .subNav a {
     border: 1px solid coral;
-    border-radius: 25px;
+    border-radius: 20px;
     color: coral;
     padding: 10px 20px;
     text-decoration: none;
@@ -131,5 +158,18 @@ p {
     background-color: coral;
     color: white;
     font-weight: 300;
+    transition: background-color, color, 500ms;
+    -webkit-transition: background-color, color, 500ms; /* Safari 3.1 to 6.0 */
+}
+
+footer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+
+footer ul {
+    font-size: .9em;
+    line-height: 1.3em;
 }
 /*** END PORTFOLIO STYLING ***/
