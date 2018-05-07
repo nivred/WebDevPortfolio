@@ -578,3 +578,46 @@ footer {
     padding: 40px 0;
     text-align: center;
 }
+
+/*** MEDIA QUERIES ***/
+
+@media screen and (max-width: 1024px) {
+    section {
+        padding: 40px 40px;
+    }
+    .container {
+       max-width: 100%;
+    }
+    #skills-list i {
+        font-size: 55px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #summary {
+        flex-flow: column;
+    }
+    #summary p:first-child, #summary p:nth-child(2) {
+        padding: 0;
+        width: 100%;
+    }
+    .screenshots {
+        height: 240px;
+        width: 180px;
+    }
+    .description {
+        height: 240px;
+        width: 180px;
+    }
+    #education {
+        flex-flow: column;
+    }
+    #skills-list {
+        flex-flow: row wrap;
+    }
+    #skills-list i {
+        font-size: 90px;
+        padding: 10px 20px;
+    }
+}
+
