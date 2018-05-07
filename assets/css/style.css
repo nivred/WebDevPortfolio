@@ -760,3 +760,97 @@ footer {
         width: 100%;
     }
 }
+
+@media screen and (max-width: 425px) {
+    #summary p span {
+        font-size: 1.2em;
+    }
+    .splash {
+        height: 305px;
+    }
+    #logo h1 {
+        display: block;
+        font-size: 2.2em;
+        height: 35px;
+    }
+    #logo span h1 {
+        font-size: 1.175em;
+    }
+    #construction {
+        font-size: 1.5em;
+    }
+    #construction p:last-child {
+        font-size: 1.5em;
+    }
+    #skills ul {
+        font-size: .8em;
+        text-align: center;
+    }
+    .devicons {
+        font-size: 65px;
+    }
+    .fa-react:before, .fa-wordpress:before {
+        font-size: 55px;
+    }
+    #skills .devi-label span i {
+        padding: 5px 0;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .splash {
+        height: 275px;
+    }
+    section {
+        padding: 40px 10px;
+    }
+    .container {
+        max-width: 100%;
+    }
+    #summary p span {
+        font-size: 1.25em;
+    }
+    .devicons {
+        font-size: 55px;
+    }
+    .fa-react:before, .fa-wordpress:before {
+        font-size: 45px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .splash {
+        height: 260px;
+    }
+    #summary p:first-child {
+        font-size: 1.2em;
+    }
+    #summary p span {
+        font-size: 1.1em;
+    }
+    .screenshots {
+        height: 220px;
+        width: 160px;
+    }
+    .description {
+        height: 220px;
+        width: 160px;
+    }
+
+    #construction {
+        font-size: 1.4em;
+    }
+    
+    #construction p:last-child {
+        font-size: 1.4em;
+    }
+    #skills ul {
+        font-size: .7em;
+    }
+    .devicons {
+        font-size: 50px;
+    }
+    .fa-react:before, .fa-wordpress:before {
+        font-size: 40px;
+    }
+}
