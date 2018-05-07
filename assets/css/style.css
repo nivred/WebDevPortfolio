@@ -47,11 +47,23 @@ table {
 /*** BEGIN PORTFOLIO STYLING ***/
 body {
     background-color: #171717;
-    background: url(../img/background.jpg) no-repeat;
+    
     color: aliceblue;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
 }
+
+/* .video-background {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    background: url(assets/img/933706.mp4);
+    background-size: contain;
+    position: absolute;
+    z-index: -100;
+    overflow: hidden;
+} */
+
 
 h2, h3 {
     font-weight: 600;
