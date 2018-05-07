@@ -19,7 +19,6 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -42,146 +41,540 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/*** END RESET CSS STYLING ***/
-
-/*** BEGIN PORTFOLIO STYLING ***/
-body {
-    background-color: #171717;
-    
-    color: aliceblue;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+* {
+    box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-font-smoothing:antialiased;
+	-moz-font-smoothing:antialiased;
+	-o-font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
 }
 
-/* .video-background {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    background: url(assets/img/933706.mp4);
-    background-size: contain;
-    position: absolute;
-    z-index: -100;
-    overflow: hidden;
-} */
+/*** END RESET CSS STYLING ***/
 
-
-h2, h3 {
+body {
+    background-color: #171717;
+    color: #d3d3c3;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px 4px #000000;
+}
+h2 {
+    color: #e6e6d8;
+    font-family: 'Days One', sans-serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px black;
+}
+h3 {
+    color: #e6e6d8;
     font-weight: 600;
     margin-bottom: 3px;
 }
-
-h2 {
-    color: coral;
-}
-
-h3 {
-    color: #DADFFF;
-    font-size: 1em;
-    line-height: 1.3em;
-}
-
 p {
-    font-size: .8em;
-    line-height: 1.3em;
+    margin-bottom: 8px;
+}
+#masthead {
+    background-color: #000000;
+}
+.splash {
+    background-image: url("../img/splash.png");
+    background-attachment: fixed;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    height: 500px;
+    opacity: 0;
+}
+#fixed-nav {
+    background-color: #171717;
+    border: 1px solid #515151;
+    border-bottom-color: #888888;
+    border-top-color: #333333;
+    border-radius: 15px 0 0 15px;
+    color:#f0f8ff;
+    height: 170px;
+    padding-top: 12px;
+    position: fixed;
+    right: 0;
+    top: 50px;
+    width: 60px;
+    z-index: 10;
+}
+#info h2, #info li {
+    margin: auto;
+    text-align: center;    
+}
+#info h2 {
+    color:#f0f8ff;
+    font-size: 1em;
     margin-bottom: 5px;
 }
-
-.wrapper {
-    margin: 0 auto;
-    width: 998px;
+#info .fa, #info .fab, #info .fas {
+    color:#f0f8ff;
+    font-size: 42px;
+    list-style: none;
+    text-align: center;
+    text-shadow: none;
+    width: 50px;
 }
-
-#main-content {
-    display: flex;
-    flex-flow: row wrap;
-    margin: 100px auto;
+#info .fa:hover, #info .fab:hover, #info .fas:hover {
+    background: linear-gradient(to top right, orange, orangered, orangered);
+    background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    transition:all 0.3s ease-in;
+    -webkit-transition:all 0.3s ease-in;
+	-moz-transition:all 0.3s ease-in;
 }
-
-.direction-arrow {
+#menu-icon, #menu-mobile {
+    display: none;
+}
+#logo-tab {
+    border-bottom: 5px outset #2a2a2a;
+    margin-top: -100px;
+}
+#logo {
+    background-color: #171717;
+    border-radius: 25px 25px 0 0;
     display: inline-block;
-    opacity: 0.2;
-        filter: Alpha(opacity=20); /* IE8 and earlier */
-    padding: 80px 10px 0 10px;
-}
-
-.direction-arrow:hover {
-    display: inline-block;
-    opacity: 1.0;
-        filter: Alpha(opacity=100); /* IE8 and earlier */
-    transition: opacity 500ms;
-        -webkit-transition: opacity 500ms; /* Safari 3.1 to 6.0 */
-    padding: 80px 10px 0 10px;
-}
-
-#slider-container {
-    height: 400px;
-    overflow: hidden;
-}
-
-.project-content {
-    display: flex;
-    flex-flow: row wrap;
-    padding: 20px;
-}
-
-.thumbnails {
-    /* background-color: coral; */ /* spacing problem */
-    display: flex;
-    flex-flow: row wrap;
-    width: 400px;
-}
-
-.thumbnails img {
-    border: 1px solid ghostwhite;
-}
-
-.thumbnail-lg {
-    margin-bottom: 4px;
-}
-
-.thumbnail-sm2 {
-    margin-left: 6px;
-}
-
-.project-detail {
-    margin-left: 18px;
-    width: 400px;
+    padding: 30px 30px 35px 30px;
     position: relative;
+    text-align: center;
+    z-index: 5;
 }
-
-.spacer {
-    margin: 0 10px;
-}
-
-.subNav {
+#logo-outline {
+    font-size: 29px;
+    border: 4px solid #515151;
+    border-radius: 25px 25px 0 0;
+    display: inline-block;
+    left: 0;
+    padding: 34px 34px 0 34px;
     position: absolute;
-    bottom: 14px;
+    text-align: center;
+    z-index: 1;
 }
-
-.subNav a {
-    border: 1px solid coral;
-    border-radius: 20px;
-    color: coral;
-    padding: 10px 20px;
+#logo h1 {
+    color: #f0f8ff;
+    font-family: 'Days One', sans-serif;
+    font-size: 48px;
+    height: 48px;
+    margin: 0;
+    text-shadow: 3px 3px black;
+}
+#logo span h1 {
+    font-size: 26px;
+    height: 30px;
+}
+section {
+    margin: 0 auto;
+    padding: 40px 60px 70px 60px;
+}
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+#about-bg {
+    background: linear-gradient(to bottom right, #000000, #333333);
+    border-bottom-color: #515151;
+    border-bottom-style: outset;
+    border-bottom-width: 10px;
+}
+#about-bg h2 {
+    margin-bottom: 10px;
+}
+#about a {
+    color: orangered;
     text-decoration: none;
 }
-
-.subNav a:hover {
-    background-color: coral;
-    color: white;
-    font-weight: 300;
-    transition: background-color, color, 500ms;
-    -webkit-transition: background-color, color, 500ms; /* Safari 3.1 to 6.0 */
-}
-
-footer {
+#summary {
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
+}
+#summary p:first-child {
+    color: #ffffff;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.35em;
+    padding-right: 15px;
+    text-align: right;
+    width: 50%;
+}
+#summary p:nth-child(2){
+    font-size: 1em;
+    line-height: 2em;
+    padding-left: 15px;
+    width: 50%;
+}
+#summary p span {
+    display: block;
+    font-size: 115%;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 10px;
+}
+#construction {
+    background: url("../img/metallicBG.jpg") no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    color: #d3d3c3;
+    font-size: 1.75em;
+    padding: 40px 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000000;
+}
+#construction a {
+    color: oldlace;
+    list-style: none;
+}
+#construction p:last-child {
+    color: orangered;
+    font-family: 'Days One', sans-serif;
+    font-size: 2.5em;
+    margin-top: 20px;
+    text-shadow: 3px 3px black;
+}
+#message {
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 40px;
 }
 
-footer ul {
-    font-size: .9em;
-    line-height: 1.3em;
+#portfolio h2 {
+    margin-bottom: 20px;
 }
-/*** END PORTFOLIO STYLING ***/
+#portfolio-bg {
+    background-attachment: fixed;
+    background-image: url('../img/portfolio-bg.jpg');
+    background-position-x: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+#project-container {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+.project {
+    background: radial-gradient(circle at top, #333333, #000000);
+    border: 4px solid #f0f8ff;
+    width: 280px;
+    height: 400px;
+    line-height: 1.2em;
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 25px 15px;
+    position: relative;
+}
+.project h4 {
+    border-bottom: 1px solid goldenrod;
+    color: #fff1a1;
+    font-size: 1.075em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.project p {
+    color: aliceblue;
+}
+.project .tools {
+    display: flex;
+    flex-flow: row wrap;
+    position: absolute;
+    bottom: 60px;
+}
+.project .links {
+    bottom: 15px;
+    position: absolute;
+    width: 100%;
+}
+.project li {
+    display: inline-block;
+}
+.project .url {
+    background: linear-gradient(to bottom, orangered, #aa2d00);
+    border-radius: 4px;
+    color: aliceblue;
+    display: inline-block;
+    font-size: .9em;
+    font-weight: bold;
+    padding-top: 8px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    text-shadow: none;
+    height: 35px;
+    width: 119px;
+}
+.project .url:hover {
+    background: linear-gradient(to bottom, #aa2d00,orangered);
+}
+.project h5 {
+    border-bottom: 1px solid goldenrod;
+    color: #fff1a1;
+    font-size: .8em;
+    font-style: italic;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.project .tools {
+    width: 245px;
+}
+.project .tools li {
+    background: linear-gradient(to bottom right, #fcff34, #e07116);
+    border-radius: 2px;
+    color: #171717;
+    font-size: .9em;
+    font-weight: 600;
+    margin: 3px;
+    padding: 4px 8px;
+    text-shadow: none;
+}
+
+/*** PROJECT HOVER EFFECT ***/
+
+.top, .mid, .btm {
+    background-color: greenyellow;
+    height: 150px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition-duration: 0.8s;
+    width: 100%;
+}
+.mid {
+    background: linear-gradient(to top left, #000000, #2a2a2a);
+    height: 100px;
+    left: 0px;
+    top: 150px;
+    width: 100%;
+}
+.btm {
+    top: 250px;
+    transition-duration: 0.8s;
+}
+.project:hover .top, .project:hover .btm {
+    width: 0%;
+}
+.project:hover .mid {
+    left: 293px;
+}
+.project h3 {
+    color: ghostwhite;
+    font-size: 1.5sem;
+    z-index: 1;
+    left: 100px;
+    position: absolute;
+    top: 187px;
+    transform: translate(-35%);
+    transition-duration: 1.5s;
+    width: 230px;
+}
+.project:hover h3 {
+    animation: fadeout .5s;
+    left: -150%;
+}
+@keyframes fadeout {
+    0%      {opacity: 1;}
+    100%    {opacity: 0;}
+}
+
+/*** END PROJECT HOVER EFFECT ***/
+
+#project-1 .top {
+    background: url(../img/concertfinder1.jpg) no-repeat;
+}
+#project-1 .btm {
+    background: url(../img/concertfinder2.jpg) no-repeat;
+}
+#project-2 .top {
+    background: url(../img/cannonballrun1.jpg) no-repeat;
+}
+#project-2 .btm {
+    background: url(../img/cannonballrun2.jpg) no-repeat;
+}
+#project-3 .top {
+    background: url(../img/braindead1.jpg) no-repeat;
+}
+#project-3 .btm {
+    background: url(../img/braindead2.jpg) no-repeat;
+}
+#project-4 .top {
+    background: url(../img/creativitycoach1.jpg) no-repeat;
+}
+#project-4 .btm {
+    background: url(../img/creativitycoach2.jpg) no-repeat;
+}
+#skills-bg {
+    background: radial-gradient(circle at top, #333333, #000000);
+    border-bottom-color: #515151;
+    border-bottom-style: outset;
+    border-bottom-width: 10px;
+    border-top-width: 10px;
+    border-top-style: outset;
+    border-top-color: #252525;
+}
+#skills .container {
+    align-items: center;
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+#skills p {
+    line-height: 2em;
+}
+#skills ul {
+    align-items: center;
+    color: goldenrod;
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+#skills li.edu {
+    border: 1px solid goldenrod;
+    box-shadow: 2px 2px 2px black;
+    font-weight: 600;
+    margin-top: 20px;
+    padding: 10px 15px;
+}
+#skills-list {
+    margin-top: 25px;
+}
+#skills-list i {
+    background: linear-gradient(to bottom right, greenyellow, orangered);
+    background-clip: text;
+        background: -webkit-linear-gradient(to bottom right, greenyellow, orangered);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    display: block;
+    padding: 10px 0;
+    font-size: 80px;
+    text-shadow: none;
+}
+#skills-list li {
+    text-align: center;
+}
+
+/*** CONTACT FORM ***/
+
+.form-contact {
+    display: flex;
+    flex-flow: row;
+    font-size: 1em;
+}
+.form-input {
+    padding-right:20px;
+    width: 40%;
+}
+.form-textarea {
+    width: 60%;
+}
+input[type=text], input[type=email], input[type=button], textarea {
+    background: linear-gradient(to bottom, #2a2a2a, #333333);
+    border: none;
+    border-bottom: 1px solid #00a8de;
+    border-left: 1px solid #7ad5f3;
+    border-top: 1px solid  #f561a3;
+    border-right: 1px solid #e91876;
+    border-radius: 5px;
+    color: #f0f8ff;
+    font-size: 1em;
+    padding: 12px;
+    resize: none;
+    width: 100%;
+}
+textarea {
+    font-family: inherit;
+    font-size: 1em;
+}
+label {
+    display: inline-block;
+    padding: 15px 0 8px;
+}
+label, .form-contact li .fas {
+    color: #bebeb0;
+}
+button.btn {
+    background: linear-gradient(to bottom, #2a2a2a, #171717, #000000);
+    border: none;
+    border-bottom: 1px solid #333333;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px black;
+    color: #bebeb0;
+    font-size: 1.2em;
+    margin-top: 15px;
+    padding: 16px 0;
+    width: 100%;
+}
+button.btn:hover, #btn button fab:hover::before {
+    background: linear-gradient(to bottom, #000000, #101010, #2a2a2a);
+    color: purple;
+    transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+	-moz-transition:all 0.3s ease-in-out;
+}
+#form-send {
+    display: flex;
+    flex-flow: row;
+}
+.form-alert {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 20px;
+    text-align: center;
+}
+.form-error {
+    color: orangered;
+}
+.form-success {
+    color: greenyellow;
+}
+.input-error {
+    border-color: orangered;
+}
+.input-success {
+    border-color: greenyellow;
+}
+fieldset {
+	border: medium none !important;
+	margin: 0 0 10px;
+	min-width: 100%;
+	padding: 0;
+	width: 100%;
+}
+.form-contact input[type="text"]:hover,
+.form-contact input[type="email"]:hover,
+.form-contact input[type="tel"]:hover,
+.form-contact input[type="url"]:hover,
+.form-contact textarea:hover {
+	-webkit-transition:border-color 0.3s ease-in-out;
+	-moz-transition:border-color 0.3s ease-in-out;
+	transition:border-color 0.3s ease-in-out;
+	border:1px solid goldenrod;
+}
+.form-contact button[type="submit"]:active { 
+    box-shadow:inset 0 1px 3px #00000080; 
+}
+.form-contact input:focus,
+.form-contact textarea:focus, 
+.form-contact button:focus {
+	outline:0;
+	border:1px solid goldenrod;
+}
+
+/*** END CONTACT FORM ***/
+
+footer {
+    background-color: #101010;
+    border-top-width: 10px;
+    border-top-style: outset;
+    border-top-color: #252525;
+    color: #eeeeee;
+    font-size: 90%;
+    padding: 40px 0;
+    text-align: center;
+}
