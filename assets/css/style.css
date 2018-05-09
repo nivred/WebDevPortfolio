@@ -279,6 +279,12 @@ section {
 .project p {
     color: aliceblue;
 }
+.project p a {
+    color: #ff4500;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .project .tools {
     bottom: 60px;
     display: flex;
