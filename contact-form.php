@@ -19,7 +19,7 @@
             echo "<span class='form-success'>MESSAGE SENT</span>";
 
             $mailTo = "contact@dervinmejia.com";
-            $headers = "From: ".$emailFrom;
+            $headers = "From: ".$email;
             $txt = "Form submission from ".$name." at ".$email.".\n\n".$message;
         
             mail($mailTo, $subject, $txt, $headers);
