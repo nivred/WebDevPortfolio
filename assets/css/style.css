@@ -52,7 +52,9 @@ table {
 }
 
 /*** END RESET CSS STYLING ***/
-
+.hidden {
+    opacity: 0;
+}
 body {
     background-color: #171717;
     color: #d3d3c3;
@@ -284,7 +286,6 @@ section {
     font-weight: bold;
     text-decoration: none;
 }
-
 .project .tools {
     bottom: 60px;
     display: flex;
@@ -370,14 +371,17 @@ section {
 }
 .project h3 {
     color: ghostwhite;
-    font-size: 1.5sem;
+    font-size: 1em;
     z-index: 1;
     left: 100px;
     position: absolute;
-    top: 187px;
+    top: 180px;
     transform: translate(-35%);
     transition-duration: 1.5s;
     width: 230px;
+}
+.project h3 span {
+    font-size: .8em;
 }
 .project:hover h3 {
     animation: fadeout .5s;
@@ -448,6 +452,7 @@ section {
 }
 #skills-list {
     margin-top: 25px;
+    transition: all 0.8s ease;
 }
 #skills-list i {
     background: linear-gradient(to bottom right, greenyellow, orangered);
@@ -510,6 +515,7 @@ button.btn {
     border-radius: 5px;
     box-shadow: 2px 2px 4px black;
     color: #bebeb0;
+    cursor: pointer;
     font-size: 1.2em;
     margin-top: 15px;
     padding: 16px 0;
@@ -559,10 +565,10 @@ fieldset {
 	-webkit-transition:border-color 0.3s ease-in-out;
 	-moz-transition:border-color 0.3s ease-in-out;
 	transition:border-color 0.3s ease-in-out;
-	border:1px solid goldenrod;
+    border:1px solid goldenrod;
 }
 .form-contact button[type="submit"]:active { 
-    box-shadow:inset 0 1px 3px #00000080; 
+    box-shadow:inset 0 1px 3px #00000080;
 }
 .form-contact input:focus,
 .form-contact textarea:focus, 
@@ -705,7 +711,7 @@ footer {
         font-size: 1.3em;
         text-align: left;
     }
-    #summary p:nth-child(2), #summary p span {
+    #summary p:nth-child(2), #summary p span, #skills p {
         line-height: 1.5em;
         text-align: left;
     }
