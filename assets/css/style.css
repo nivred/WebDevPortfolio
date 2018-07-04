@@ -57,10 +57,16 @@ table {
 }
 .fade-in {
     opacity: 1;
-    transition: opacity .5s ease-in;
+    transform: rotateY(360deg);
+    transform-style: preserve-3d;
+    transition: all 1s ease-in;
 }
 .collapse {
     display: none !important;
+}
+.expand {
+    display: flex;
+    transition: all 1s ease-out;
 }
 body {
     background-color: #171717;
@@ -406,6 +412,7 @@ section {
     border-top-color: #252525;
     border-top-style: outset;
     border-top-width: 10px;
+    transition: all .5s ease-out;
 }
 #skills .container {
     align-items: center;
@@ -433,9 +440,10 @@ section {
 }
 #skills-list {
     margin-top: 25px;
-    transition: all 0.8s ease;
 }
-
+#skills-list li {
+    text-align: center;
+}
 #skills-list i {
     background: linear-gradient(to bottom right, greenyellow, orangered);
     background-clip: text;
@@ -446,9 +454,6 @@ section {
     font-size: 80px;
     padding: 10px 0;
     text-shadow: none;
-}
-#skills-list li {
-    text-align: center;
 }
 
 /*** CONTACT FORM ***/
