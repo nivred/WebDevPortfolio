@@ -55,6 +55,13 @@ table {
 .hidden {
     opacity: 0;
 }
+.fade-in {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+.collapse {
+    display: none !important;
+}
 body {
     background-color: #171717;
     color: #d3d3c3;
@@ -196,15 +203,15 @@ section {
 }
 #summary p:first-child {
     color: #ffffff;
-    font-size: 2em;
+    font-size: 1.9em;
     font-weight: bold;
-    line-height: 1.35em;
+    line-height: 1.32em;
     padding-right: 15px;
     text-align: right;
     width: 50%;
 }
 #summary p:nth-child(2){
-    font-size: 1em;
+    font-size: .95em;
     line-height: 2em;
     padding-left: 15px;
     width: 50%;
@@ -215,33 +222,6 @@ section {
     font-style: italic;
     font-weight: bold;
     margin-top: 10px;
-}
-#construction {
-    background: url("../img/metallicBG.jpg") no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    color: #d3d3c3;
-    font-size: 1.75em;
-    padding: 40px 0;
-    text-align: center;
-    text-shadow: 2px 2px 4px #000000;
-}
-#construction a {
-    color: oldlace;
-    list-style: none;
-}
-#construction p:last-child {
-    color: orangered;
-    font-family: 'Days One', sans-serif;
-    font-size: 2.5em;
-    margin-top: 20px;
-    text-shadow: 3px 3px black;
-}
-#message {
-    margin: 0 auto;
-    max-width: 700px;
-    padding: 40px;
 }
 #portfolio h2 {
     margin-bottom: 20px;
@@ -434,16 +414,17 @@ section {
     justify-content: space-around;
 }
 #skills p {
+    font-size: .95em;
     line-height: 2em;
 }
-#skills ul {
+#skills #education, #skills-list {
     align-items: center;
     color: goldenrod;
     display:flex;
     flex-flow: row wrap;
     justify-content: space-around;
 }
-#skills li.edu {
+#skills .edu {
     border: 1px solid goldenrod;
     box-shadow: 2px 2px 2px black;
     font-weight: 600;
@@ -454,6 +435,7 @@ section {
     margin-top: 25px;
     transition: all 0.8s ease;
 }
+
 #skills-list i {
     background: linear-gradient(to bottom right, greenyellow, orangered);
     background-clip: text;

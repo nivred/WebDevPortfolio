@@ -27,21 +27,61 @@ $(function() {
 	});
 });
 
+window.onscroll = function(){
+	let yPos = window.pageYOffset || document.documentElement.scrollTop;
+	
+	console.log('top: '  + (yPos));
+	const skillsList = document.getElementById('skills-list');
+	const skills = document.getElementsByClassName('devi');
 
+		if (yPos >= 1300) {
+			skillsList.classList.remove('collapse');
+			setTimeout(displaySkills, 500);
+
+			function displaySkills() {
+				for(let x in skills){
+				skills[x].classList.add('fade-in');
+				}
+			}
+			// for(let x in skills) {
+			// 	console.log(skills[x])
+				// skills[x].classList.remove('hidden');
+
+				// skills[x].classList.add('fade-in');
+			// }
+			// while (skills.length) {
+			// 	console.log(skills);
+			// 	skills[0].classList.remove('hidden');
+			// }
+			// while (skills.length) {
+			// 	skills[0].classList.add('fade-in');
+			// }
+		}
+}
+
+
+
+// window.addEventListener('scroll', console.log(scrollY));
+
+// window.addEventListener('scroll', function(e){
+// 	let val;
+// 	val = e.target;
+// 	console.log(val.type);
+// });
 
 
 // const skills = document.querySelectorAll('.devi')
 
 // function scrollReveal(e) {
 // 	console.log(window.scrollY);
-// 	skills.forEach(skill => {
-// 		const revealAt = (window.scrollY + window.innerHeight) - skill.height / 2;
+	// skills.forEach(skill => {
+	// 	const revealAt = (window.scrollY + window.innerHeight) - skill.height / 2;
 
-// 		if (revealAt) {
-// 			skills.removeClass('hidden');
-// 			console.log('NOW')
-// 		}
-// 	});
+	// 	if (revealAt) {
+	// 		skills.removeClass('hidden');
+	// 		console.log('NOW')
+	// 	}
+	// });
 // }
 
 // window.addEventListener('scroll', scrollReveal());
