@@ -7,7 +7,6 @@
   <title>Birthday RSVP</title>
   <link rel="icon" href="data:,">
   <style>
-    /* ================== STYLING ================== */
     :root {
       --bg: #f7f8fb;
       --card: #fff;
@@ -187,26 +186,8 @@
   <script>
     // ================== CONFIG ==================
     const WEBAPP_URL =
-      "https://script.google.com/macros/s/AKfycbyOxMmnGQTuBsvnTbU4kCpN5AxLRRfUXsOZaJnyvKS_Q2RhJdw6iugXZAPdoFY3-9nZ/exec"
-      
-    async function postData(data) {
-      try {
-        const res = await fetch(WEBAPP_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data),
-          mode: "cors" // ensure cross-origin
-        });
-        return await res.json();
-      } catch (err) {
-        console.error(err);
-        return null;
-      }
-    }
-
-
+    "https://script.google.com/macros/s/AKfycbyOxMmnGQTuBsvnTbU4kCpN5AxLRRfUXsOZaJnyvKS_Q2RhJdw6iugXZAPdoFY3-9nZ/exec"
+    // replace with your "Anyone" webapp URL
     const EVENTS = [{
         key: "Brunch at Sunny Café (10:00 AM)",
         icon: "☕️"
@@ -266,19 +247,20 @@
           },
           body: JSON.stringify(data)
         });
-        const json = await res.json();
-        return json.data || [];
+        return res.json();
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching:", err);
         return [];
       }
     }
 
     async function loadAll() {
-      const rows = await postData({
-        action: "read"
+      const rowsRes = await postData({
+        action: "list"
       });
-      renderAll(rows);
+      if (rowsRes && rowsRes.success) {
+        renderAll(rowsRes.data);
+      }
     }
 
     // ================== RENDER ==================
@@ -286,21 +268,21 @@
       document.querySelectorAll(".list").forEach(ul => ul.innerHTML = "");
       if (!rows) return;
       rows.forEach(r => {
-        if (!r || !r.Event) return;
+        if (!r || !r.event) return;
         const card = document.querySelector(
-          `[data-event="${r.Event.replace(/[^\w\-]+/g,'_')}"]`);
+          `[data-event="${r.event.replace(/[^\w\-]+/g,'_')}"]`);
         if (!card) return;
         const ul = card.querySelector(".list");
         const li = document.createElement("li");
         li.className = "item";
-        li.dataset.id = r.ID;
-        if (r.Event === NO_SHOW.key) {
+        li.dataset.id = r.id;
+        if (r.event === NO_SHOW.key) {
           li.innerHTML =
-            `<div><strong>${r.Name}</strong>${r.Note ? `<div class="subtle">${r.Note}</div>` : ""}</div>
+            `<div><strong>${r.name}</strong>${r.note ? `<div class="subtle">${r.note}</div>` : ""}</div>
             <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
         } else {
           li.innerHTML =
-            `<div><strong>${r.Name}</strong> - ${r.Guests} guests</div>
+            `<div><strong>${r.name}</strong> - ${r.guests} guests</div>
             <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
         }
         ul.appendChild(li);
@@ -345,24 +327,20 @@
 
       if (t.classList.contains("update")) {
         const li = t.closest("li");
-        // BUG FIX: Remove invalid optional chaining before .textContent and .value
-        const oldName = li.querySelector("strong") ? li.querySelector("strong").textContent :
-          "";
-        const oldText = li.querySelector(".subtle") ? li.querySelector(".subtle")
-          .textContent : "";
+        const oldName = li.querySelector("strong")?.textContent || "";
+        const oldText = li.querySelector(".subtle")?.textContent || "";
         const oldGuests = li.textContent.match(/- (\d+) guests/) ? li.textContent.match(
           /- (\d+) guests/)[1] : 0;
         li.innerHTML = `<div class="edit-wrap">
           <input type="text" class="edit-name" value="${oldName}">
-          ${eventName===NO_SHOW.key?`<textarea class="edit-note">${oldText}</textarea>`:`<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
-          <button class="btn save">Save</button><button class="btn cancel">Cancel</button>
+          ${eventName === NO_SHOW.key ? `<textarea class="edit-note">${oldText}</textarea>` : `<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
+          <button class="btn save">Save</button>
+          <button class="btn cancel">Cancel</button>
         </div>`;
         li.querySelector(".save").addEventListener("click", async () => {
           const newName = li.querySelector(".edit-name").value.trim();
-          const newGuests = li.querySelector(".edit-guests") ? li.querySelector(
-            ".edit-guests").value : 0;
-          const newNote = li.querySelector(".edit-note") ? li.querySelector(
-            ".edit-note").value : "";
+          const newGuests = li.querySelector(".edit-guests") ? li.querySelector(".edit-guests").value || 0 : 0;
+          const newNote = li.querySelector(".edit-note") ? li.querySelector(".edit-note").value || "" : "";
           if (!newName) return alert("Enter name");
           await postData({
             action: "update",
