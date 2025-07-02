@@ -187,8 +187,26 @@
   <script>
     // ================== CONFIG ==================
     const WEBAPP_URL =
-    "https://script.google.com/macros/s/AKfycbz_-b5U46iDOiz3rnhE7T4luNMMg3Rdi4KlekX1sBDsxmzzPdLwxKjJUwxkVtu7OPLh/exec;";
-    
+      "https://script.google.com/macros/s/AKfycbyOxMmnGQTuBsvnTbU4kCpN5AxLRRfUXsOZaJnyvKS_Q2RhJdw6iugXZAPdoFY3-9nZ/exec"
+      
+    async function postData(data) {
+      try {
+        const res = await fetch(WEBAPP_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data),
+          mode: "cors" // ensure cross-origin
+        });
+        return await res.json();
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
+    }
+
+
     const EVENTS = [{
         key: "Brunch at Sunny Café (10:00 AM)",
         icon: "☕️"
@@ -328,8 +346,10 @@
       if (t.classList.contains("update")) {
         const li = t.closest("li");
         // BUG FIX: Remove invalid optional chaining before .textContent and .value
-        const oldName = li.querySelector("strong") ? li.querySelector("strong").textContent : "";
-        const oldText = li.querySelector(".subtle") ? li.querySelector(".subtle").textContent : "";
+        const oldName = li.querySelector("strong") ? li.querySelector("strong").textContent :
+          "";
+        const oldText = li.querySelector(".subtle") ? li.querySelector(".subtle")
+          .textContent : "";
         const oldGuests = li.textContent.match(/- (\d+) guests/) ? li.textContent.match(
           /- (\d+) guests/)[1] : 0;
         li.innerHTML = `<div class="edit-wrap">
@@ -339,8 +359,10 @@
         </div>`;
         li.querySelector(".save").addEventListener("click", async () => {
           const newName = li.querySelector(".edit-name").value.trim();
-          const newGuests = li.querySelector(".edit-guests") ? li.querySelector(".edit-guests").value : 0;
-          const newNote = li.querySelector(".edit-note") ? li.querySelector(".edit-note").value : "";
+          const newGuests = li.querySelector(".edit-guests") ? li.querySelector(
+            ".edit-guests").value : 0;
+          const newNote = li.querySelector(".edit-note") ? li.querySelector(
+            ".edit-note").value : "";
           if (!newName) return alert("Enter name");
           await postData({
             action: "update",
