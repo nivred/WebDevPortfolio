@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday RSVP</title>
   <link rel="icon" href="data:,">
-
   <style>
     :root {
       --bg: #f7f8fb;
@@ -29,13 +28,13 @@
 
     header {
       padding: 16px;
-      text-align: center
+      text-align: center;
     }
 
     .wrap {
       max-width: 600px;
       margin: 0 auto;
-      padding: 12px
+      padding: 12px;
     }
 
     .card {
@@ -48,14 +47,14 @@
 
     .card h2 {
       margin: .25rem 6px 12px;
-      font-size: 20px
+      font-size: 20px;
     }
 
     .row {
       display: flex;
       gap: 8px;
       align-items: center;
-      margin: 8px 6px 12px
+      margin: 8px 6px 12px;
     }
 
     .row input[type="text"],
@@ -63,7 +62,7 @@
       flex: 1;
       padding: 10px 12px;
       border: 1px solid #e5e7eb;
-      border-radius: 10px
+      border-radius: 10px;
     }
 
     .row input[type="number"] {
@@ -82,17 +81,17 @@
       background: var(--brand);
       color: #fff;
       font-weight: 600;
-      cursor: pointer
+      cursor: pointer;
     }
 
     .row button.cta:hover {
-      background: var(--brand2)
+      background: var(--brand2);
     }
 
     .list {
       list-style: none;
       padding: 0;
-      margin: 0
+      margin: 0;
     }
 
     .item {
@@ -118,51 +117,51 @@
       border-radius: 8px;
       padding: 6px 10px;
       font-weight: 600;
-      cursor: pointer
+      cursor: pointer;
     }
 
     .btn.update {
       background: var(--warn);
-      color: #fff
+      color: #fff;
     }
 
     .btn.delete {
       background: var(--danger);
-      color: #fff
+      color: #fff;
     }
 
     .btn.save {
       background: var(--ok);
-      color: #fff
+      color: #fff;
     }
 
     .btn.cancel {
       background: #e5e7eb;
-      color: #111
+      color: #111;
     }
 
     .edit-wrap {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
-      width: 100%
+      width: 100%;
     }
 
     .edit-wrap input[type="text"] {
       flex: 1;
-      min-width: 120px
+      min-width: 120px;
     }
 
     .edit-wrap select {
       padding: 8px;
       border: 1px solid #e5e7eb;
-      border-radius: 10px
+      border-radius: 10px;
     }
 
     .subtle {
       color: var(--muted);
       font-size: 14px;
-      margin: 0 6px 8px
+      margin: 0 6px 8px;
     }
 
     @media(max-width:480px) {
@@ -171,7 +170,7 @@
       }
 
       .row button.cta {
-        flex: 1 0 100%
+        flex: 1 0 100%;
       }
     }
   </style>
@@ -185,6 +184,9 @@
   <div class="wrap" id="app"></div>
 
   <script>
+    // ================== CONFIG ==================
+    const WEBAPP_URL =
+    "https://script.google.com/macros/s/AKfycbz_-b5U46iDOiz3rnhE7T4luNMMg3Rdi4KlekX1sBDsxmzzPdLwxKjJUwxkVtu7OPLh/exec";
     const EVENTS = [{
         key: "Brunch at Sunny Café (10:00 AM)",
         icon: "☕️"
@@ -212,18 +214,19 @@
     };
     const app = document.getElementById("app");
 
+    // ================== LAYOUT ==================
     function cardTemplate(title, isNoShow = false) {
       const idSafe = title.replace(/[^\w\-]+/g, '_');
       return `<section class="card" data-event="${idSafe}">
-        <h2>${isNoShow ? NO_SHOW.icon : EVENTS.find(e => e.key === title).icon} ${title}</h2>
-        <p class="subtle">${isNoShow ? "Leave a note if you’d like." : "If guests is blank, assume 0."}</p>
-        <div class="row">
-          <input type="text" class="name" placeholder="First name">
-          ${isNoShow ? `<button class="cta add">Submit</button>` : `<input type="number" class="guests" min="0" placeholder="0"><button class="cta add">Count Me In</button>`}
-        </div>
-        ${isNoShow ? `<div class="row"><textarea class="note" rows="2" placeholder="Optional note"></textarea></div>` : ``}
-        <ul class="list"></ul>
-      </section>`;
+    <h2>${isNoShow?NO_SHOW.icon:EVENTS.find(e=>e.key===title)?.icon} ${title}</h2>
+    <p class="subtle">${isNoShow?"Leave a note if you’d like.":"If guests is blank, assume 0."}</p>
+    <div class="row">
+      <input type="text" class="name" placeholder="First name">
+      ${isNoShow?`<button class="cta add">Submit</button>`:`<input type="number" class="guests" min="0" placeholder="0"><button class="cta add">Count Me In</button>`}
+    </div>
+    ${isNoShow?`<div class="row"><textarea class="note" rows="2" placeholder="Optional note"></textarea></div>`:""}
+    <ul class="list"></ul>
+  </section>`;
     }
 
     function mountLayout() {
@@ -232,27 +235,36 @@
     }
     mountLayout();
 
-    const WEBAPP_URL =
-      "https://script.google.com/macros/s/AKfycbz_-b5U46iDOiz3rnhE7T4luNMMg3Rdi4KlekX1sBDsxmzzPdLwxKjJUwxkVtu7OPLh/exec";
-      // <-- Replace with your deployed Google Apps Script webapp URL
-
+    // ================== FETCH FUNCTIONS ==================
     async function postData(data) {
-      await fetch(WEBAPP_URL, {
-        method: 'POST',
-        body: JSON.stringify(data)
-      });
-      loadAll();
+      try {
+        const res = await fetch(WEBAPP_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+        return res.json();
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
     }
 
     async function loadAll() {
-      const res = await fetch(WEBAPP_URL);
-      const rows = await res.json();
+      const rows = await postData({
+        action: "read"
+      });
       renderAll(rows);
     }
 
+    // ================== RENDER ==================
     function renderAll(rows) {
       document.querySelectorAll(".list").forEach(ul => ul.innerHTML = "");
+      if (!rows) return;
       rows.forEach(r => {
+        if (!r || !r.Event) return; // prevent replace error
         const card = document.querySelector(
           `[data-event="${r.Event.replace(/[^\w\-]+/g,'_')}"]`);
         if (!card) return;
@@ -261,93 +273,83 @@
         li.className = "item";
         li.dataset.id = r.ID;
         if (r.Event === NO_SHOW.key) {
-          li.innerHTML = `<div><strong>${r.Name}</strong>${r.Note ? `<div class="subtle">${r.Note}</div>` : ""}</div>
-            <div class="actions">
-              <button class="btn update">Update</button>
-              <button class="btn delete">Delete</button>
-            </div>`;
+          li.innerHTML =
+            `<div><strong>${r.Name}</strong>${r.Note?`<div class="subtle">${r.Note}</div>`:""}</div>
+      <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
         } else {
-          li.innerHTML = `<div><strong>${r.Name}</strong> - ${r.Guests} guests</div>
-            <div class="actions">
-              <button class="btn update">Update</button>
-              <button class="btn delete">Delete</button>
-            </div>`;
+          li.innerHTML =
+            `<div><strong>${r.Name}</strong> - ${r.Guests} guests</div>
+      <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
         }
         ul.appendChild(li);
       });
     }
 
-    app.addEventListener("click", e => {
+    // ================== EVENT DELEGATION ==================
+    app.addEventListener("click", async e => {
       const t = e.target;
       const card = t.closest(".card");
       if (!card) return;
       const eventName = card.querySelector("h2").textContent.trim();
+      const nameInput = card.querySelector(".name");
+      const guestsInput = card.querySelector(".guests");
+      const noteInput = card.querySelector(".note");
 
       if (t.classList.contains("add")) {
-        const nameInput = card.querySelector(".name");
-        const guestsInput = card.querySelector(".guests");
-        const noteInput = card.querySelector(".note");
         const name = nameInput.value.trim();
         if (!name) return alert("Enter name");
-        const data = {
+        await postData({
           action: "add",
-          Event: eventName,
-          Name: name,
-          Guests: guestsInput ? guestsInput.value : 0,
-          Note: noteInput ? noteInput.value : ""
-        };
-        postData(data);
+          event: eventName,
+          name,
+          guests: guestsInput ? guestsInput.value : 0,
+          note: noteInput ? noteInput.value : ""
+        });
         nameInput.value = "";
         if (guestsInput) guestsInput.value = "";
         if (noteInput) noteInput.value = "";
+        loadAll();
       }
 
       if (t.classList.contains("delete")) {
         const li = t.closest("li");
-        const id = li.dataset.id;
         if (!confirm("Delete this entry?")) return;
-        postData({
+        await postData({
           action: "delete",
-          ID: id
+          id: li.dataset.id
         });
+        loadAll();
       }
 
       if (t.classList.contains("update")) {
         const li = t.closest("li");
-        const id = li.dataset.id;
-        const oldName = li.querySelector("strong").textContent;
-        const oldText = li.querySelector(".subtle") ? li.querySelector(".subtle").textContent :
-          "";
+        const oldName = li.querySelector("strong")?.textContent || "";
+        const oldText = li.querySelector(".subtle")?.textContent || "";
         const oldGuests = li.textContent.match(/- (\d+) guests/) ? li.textContent.match(
           /- (\d+) guests/)[1] : 0;
-
         li.innerHTML = `<div class="edit-wrap">
-          <input type="text" class="edit-name" value="${oldName}">
-          ${eventName === NO_SHOW.key ? `<textarea class="edit-note">${oldText}</textarea>` : `<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
-          <button class="btn save">Save</button>
-          <button class="btn cancel">Cancel</button>
-        </div>`;
-
-        li.querySelector(".save").addEventListener("click", () => {
+      <input type="text" class="edit-name" value="${oldName}">
+      ${eventName===NO_SHOW.key?`<textarea class="edit-note">${oldText}</textarea>`:`<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
+      <button class="btn save">Save</button><button class="btn cancel">Cancel</button>
+    </div>`;
+        li.querySelector(".save").addEventListener("click", async () => {
           const newName = li.querySelector(".edit-name").value.trim();
           const newGuests = li.querySelector(".edit-guests")?.value || 0;
           const newNote = li.querySelector(".edit-note")?.value || "";
           if (!newName) return alert("Enter name");
-
-          postData({
+          await postData({
             action: "update",
-            ID: id,
-            Name: newName,
-            Guests: newGuests,
-            Note: newNote
+            id: li.dataset.id,
+            name: newName,
+            guests: newGuests,
+            note: newNote
           });
+          loadAll();
         });
-
         li.querySelector(".cancel").addEventListener("click", () => loadAll());
       }
     });
 
-    // Initial load
     loadAll();
   </script>
 </body>
