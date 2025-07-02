@@ -166,7 +166,7 @@
 
     @media(max-width:480px) {
       .row {
-        flex-wrap: wrap
+        flex-wrap: wrap;
       }
 
       .row button.cta {
@@ -177,17 +177,18 @@
 </head>
 
 <body>
-  <header style="background: var(--ok);">
+  <header>
     <h1>🎉 Birthday RSVP</h1>
     <p>RSVP for each stop throughout the day</p>
   </header>
+
   <div class="wrap" id="app"></div>
 
   <script>
     // ================== CONFIG ==================
     const WEBAPP_URL =
     "https://script.google.com/macros/s/AKfycbyOxMmnGQTuBsvnTbU4kCpN5AxLRRfUXsOZaJnyvKS_Q2RhJdw6iugXZAPdoFY3-9nZ/exec"
-    // replace with your "Anyone" webapp URL
+
     const EVENTS = [{
         key: "Brunch at Sunny Café (10:00 AM)",
         icon: "☕️"
@@ -219,15 +220,15 @@
     function cardTemplate(title, isNoShow = false) {
       const idSafe = title.replace(/[^\w\-]+/g, '_');
       return `<section class="card" data-event="${idSafe}">
-        <h2>${isNoShow ? NO_SHOW.icon : EVENTS.find(e => e.key === title)?.icon} ${title}</h2>
-        <p class="subtle">${isNoShow ? "Leave a note if you’d like." : "If guests is blank, assume 0."}</p>
-        <div class="row">
-          <input type="text" class="name" placeholder="First name">
-          ${isNoShow ? `<button class="cta add">Submit</button>` : `<input type="number" class="guests" min="0" placeholder="0"><button class="cta add">Count Me In</button>`}
-        </div>
-        ${isNoShow ? `<div class="row"><textarea class="note" rows="2" placeholder="Optional note"></textarea></div>` : ""}
-        <ul class="list"></ul>
-      </section>`;
+    <h2>${isNoShow?NO_SHOW.icon:EVENTS.find(e=>e.key===title)?.icon} ${title}</h2>
+    <p class="subtle">${isNoShow?"Leave a note if you’d like.":"If guests is blank, assume 0."}</p>
+    <div class="row">
+      <input type="text" class="name" placeholder="First name">
+      ${isNoShow?`<button class="cta add">Submit</button>`:`<input type="number" class="guests" min="0" placeholder="0"><button class="cta add">Count Me In</button>`}
+    </div>
+    ${isNoShow?`<div class="row"><textarea class="note" rows="2" placeholder="Optional note"></textarea></div>`:""}
+    <ul class="list"></ul>
+  </section>`;
     }
 
     function mountLayout() {
@@ -241,26 +242,23 @@
       try {
         const res = await fetch(WEBAPP_URL, {
           method: "POST",
-          mode: "cors",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(data)
         });
-        return res.json();
+        return await res.json();
       } catch (err) {
-        console.error("Error fetching:", err);
-        return [];
+        console.error(err);
+        return null;
       }
     }
 
     async function loadAll() {
-      const rowsRes = await postData({
+      const response = await postData({
         action: "list"
       });
-      if (rowsRes && rowsRes.success) {
-        renderAll(rowsRes.data);
-      }
+      if (response && response.success) renderAll(response.data);
     }
 
     // ================== RENDER ==================
@@ -278,12 +276,12 @@
         li.dataset.id = r.id;
         if (r.event === NO_SHOW.key) {
           li.innerHTML =
-            `<div><strong>${r.name}</strong>${r.note ? `<div class="subtle">${r.note}</div>` : ""}</div>
-            <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
+            `<div><strong>${r.name}</strong>${r.note?`<div class="subtle">${r.note}</div>`:""}</div>
+        <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
         } else {
           li.innerHTML =
             `<div><strong>${r.name}</strong> - ${r.guests} guests</div>
-            <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
+        <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
         }
         ul.appendChild(li);
       });
@@ -309,7 +307,7 @@
           guests: guestsInput ? guestsInput.value : 0,
           note: noteInput ? noteInput.value : ""
         });
-        nameInput.value = "";
+        if (nameInput) nameInput.value = "";
         if (guestsInput) guestsInput.value = "";
         if (noteInput) noteInput.value = "";
         loadAll();
@@ -332,15 +330,14 @@
         const oldGuests = li.textContent.match(/- (\d+) guests/) ? li.textContent.match(
           /- (\d+) guests/)[1] : 0;
         li.innerHTML = `<div class="edit-wrap">
-          <input type="text" class="edit-name" value="${oldName}">
-          ${eventName === NO_SHOW.key ? `<textarea class="edit-note">${oldText}</textarea>` : `<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
-          <button class="btn save">Save</button>
-          <button class="btn cancel">Cancel</button>
-        </div>`;
+      <input type="text" class="edit-name" value="${oldName}">
+      ${eventName===NO_SHOW.key?`<textarea class="edit-note">${oldText}</textarea>`:`<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
+      <button class="btn save">Save</button><button class="btn cancel">Cancel</button>
+    </div>`;
         li.querySelector(".save").addEventListener("click", async () => {
           const newName = li.querySelector(".edit-name").value.trim();
-          const newGuests = li.querySelector(".edit-guests") ? li.querySelector(".edit-guests").value || 0 : 0;
-          const newNote = li.querySelector(".edit-note") ? li.querySelector(".edit-note").value || "" : "";
+          const newGuests = li.querySelector(".edit-guests")?.value || 0;
+          const newNote = li.querySelector(".edit-note")?.value || "";
           if (!newName) return alert("Enter name");
           await postData({
             action: "update",
