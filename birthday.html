@@ -187,7 +187,7 @@
   <script>
     // ================== CONFIG ==================
     const WEBAPP_URL =
-    "https://script.google.com/macros/s/AKfycbyOxMmnGQTuBsvnTbU4kCpN5AxLRRfUXsOZaJnyvKS_Q2RhJdw6iugXZAPdoFY3-9nZ/exec"
+      "https://script.google.com/macros/s/AKfycbyOxMmnGQTuBsvnTbU4kCpN5AxLRRfUXsOZaJnyvKS_Q2RhJdw6iugXZAPdoFY3-9nZ/exec"
 
     const EVENTS = [{
         key: "Brunch at Sunny Café (10:00 AM)",
@@ -247,10 +247,11 @@
           },
           body: JSON.stringify(data)
         });
-        return await res.json();
+        if (!res.ok) throw new Error("Network response not OK");
+        return res.json();
       } catch (err) {
         console.error(err);
-        return null;
+        return [];
       }
     }
 
