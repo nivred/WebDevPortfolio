@@ -55,6 +55,7 @@
       gap: 8px;
       align-items: center;
       margin: 8px 6px 12px;
+      flex-wrap: wrap;
     }
 
     .row input[type="text"],
@@ -63,6 +64,7 @@
       padding: 10px 12px;
       border: 1px solid #e5e7eb;
       border-radius: 10px;
+      min-width: 120px;
     }
 
     .row input[type="number"] {
@@ -74,7 +76,7 @@
     }
 
     .row button.cta {
-      flex: 1;
+      flex: 1 0 100px;
       padding: 10px 14px;
       border: none;
       border-radius: 10px;
@@ -104,6 +106,7 @@
       border: 1px solid #eef0f4;
       border-radius: 12px;
       background: #fafbff;
+      flex-wrap: wrap;
     }
 
     .actions {
@@ -181,12 +184,14 @@
     <h1>🎉 Birthday RSVP</h1>
     <p>RSVP for each stop throughout the day</p>
   </header>
+
   <div class="wrap" id="app"></div>
 
   <script>
-    // ================== CONFIG ==================
     const WEBAPP_URL =
-    "https://script.google.com/macros/s/AKfycbz_-b5U46iDOiz3rnhE7T4luNMMg3Rdi4KlekX1sBDsxmzzPdLwxKjJUwxkVtu7OPLh/exec";
+    "https://script.google.com/macros/s/AKfycbz_-b5U46iDOiz3rnhE7T4luNMMg3Rdi4KlekX1sBDsxmzzPdLwxKjJUwxkVtu7OPLh/exec;";
+    // replace with your Google Apps Script Web App URL
+
     const EVENTS = [{
         key: "Brunch at Sunny Café (10:00 AM)",
         icon: "☕️"
@@ -208,25 +213,25 @@
         icon: "🍸"
       }
     ];
+
     const NO_SHOW = {
       key: "Not Attending Any Event",
       icon: "❌"
     };
     const app = document.getElementById("app");
 
-    // ================== LAYOUT ==================
     function cardTemplate(title, isNoShow = false) {
       const idSafe = title.replace(/[^\w\-]+/g, '_');
       return `<section class="card" data-event="${idSafe}">
-    <h2>${isNoShow?NO_SHOW.icon:EVENTS.find(e=>e.key===title)?.icon} ${title}</h2>
-    <p class="subtle">${isNoShow?"Leave a note if you’d like.":"If guests is blank, assume 0."}</p>
-    <div class="row">
-      <input type="text" class="name" placeholder="First name">
-      ${isNoShow?`<button class="cta add">Submit</button>`:`<input type="number" class="guests" min="0" placeholder="0"><button class="cta add">Count Me In</button>`}
-    </div>
-    ${isNoShow?`<div class="row"><textarea class="note" rows="2" placeholder="Optional note"></textarea></div>`:""}
-    <ul class="list"></ul>
-  </section>`;
+        <h2>${isNoShow ? NO_SHOW.icon : EVENTS.find(e => e.key === title)?.icon} ${title}</h2>
+        <p class="subtle">${isNoShow ? "Leave a note if you’d like." : "If guests is blank, assume 0."}</p>
+        <div class="row">
+          <input type="text" class="name" placeholder="First name">
+          ${isNoShow ? `<button class="cta add">Submit</button>` : `<input type="number" class="guests" min="0" placeholder="0"><button class="cta add">Count Me In</button>`}
+        </div>
+        ${isNoShow ? `<div class="row"><textarea class="note" rows="2" placeholder="Optional note"></textarea></div>` : ""}
+        <ul class="list"></ul>
+      </section>`;
     }
 
     function mountLayout() {
@@ -235,7 +240,6 @@
     }
     mountLayout();
 
-    // ================== FETCH FUNCTIONS ==================
     async function postData(data) {
       try {
         const res = await fetch(WEBAPP_URL, {
@@ -253,39 +257,41 @@
     }
 
     async function loadAll() {
-      const rows = await postData({
-        action: "read"
+      const response = await postData({
+        action: "list"
       });
-      renderAll(rows);
+      if (response.success) renderAll(response.data);
     }
 
-    // ================== RENDER ==================
     function renderAll(rows) {
       document.querySelectorAll(".list").forEach(ul => ul.innerHTML = "");
       if (!rows) return;
       rows.forEach(r => {
-        if (!r || !r.Event) return; // prevent replace error
+        if (!r || !r.event) return;
         const card = document.querySelector(
-          `[data-event="${r.Event.replace(/[^\w\-]+/g,'_')}"]`);
+          `[data-event="${r.event.replace(/[^\w\-]+/g,'_')}"]`);
         if (!card) return;
         const ul = card.querySelector(".list");
         const li = document.createElement("li");
         li.className = "item";
-        li.dataset.id = r.ID;
-        if (r.Event === NO_SHOW.key) {
-          li.innerHTML =
-            `<div><strong>${r.Name}</strong>${r.Note?`<div class="subtle">${r.Note}</div>`:""}</div>
-      <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
+        li.dataset.id = r.id;
+        if (r.event === NO_SHOW.key) {
+          li.innerHTML = `<div><strong>${r.name}</strong>${r.note ? `<div class="subtle">${r.note}</div>` : ""}</div>
+            <div class="actions">
+              <button class="btn update">Update</button>
+              <button class="btn delete">Delete</button>
+            </div>`;
         } else {
-          li.innerHTML =
-            `<div><strong>${r.Name}</strong> - ${r.Guests} guests</div>
-      <div class="actions"><button class="btn update">Update</button><button class="btn delete">Delete</button></div>`;
+          li.innerHTML = `<div><strong>${r.name}</strong> - ${r.guests || 0} guests</div>
+            <div class="actions">
+              <button class="btn update">Update</button>
+              <button class="btn delete">Delete</button>
+            </div>`;
         }
         ul.appendChild(li);
       });
     }
 
-    // ================== EVENT DELEGATION ==================
     app.addEventListener("click", async e => {
       const t = e.target;
       const card = t.closest(".card");
@@ -297,12 +303,13 @@
 
       if (t.classList.contains("add")) {
         const name = nameInput.value.trim();
+        const guests = guestsInput && guestsInput.value !== "" ? guestsInput.value : 0;
         if (!name) return alert("Enter name");
         await postData({
           action: "add",
           event: eventName,
           name,
-          guests: guestsInput ? guestsInput.value : 0,
+          guests,
           note: noteInput ? noteInput.value : ""
         });
         nameInput.value = "";
@@ -328,14 +335,18 @@
         const oldGuests = li.textContent.match(/- (\d+) guests/) ? li.textContent.match(
           /- (\d+) guests/)[1] : 0;
         li.innerHTML = `<div class="edit-wrap">
-      <input type="text" class="edit-name" value="${oldName}">
-      ${eventName===NO_SHOW.key?`<textarea class="edit-note">${oldText}</textarea>`:`<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
-      <button class="btn save">Save</button><button class="btn cancel">Cancel</button>
-    </div>`;
+          <input type="text" class="edit-name" value="${oldName}">
+          ${eventName === NO_SHOW.key ? `<textarea class="edit-note">${oldText}</textarea>` : `<input type="number" class="edit-guests" min="0" value="${oldGuests}">`}
+          <button class="btn save">Save</button>
+          <button class="btn cancel">Cancel</button>
+        </div>`;
+
         li.querySelector(".save").addEventListener("click", async () => {
           const newName = li.querySelector(".edit-name").value.trim();
-          const newGuests = li.querySelector(".edit-guests")?.value || 0;
-          const newNote = li.querySelector(".edit-note")?.value || "";
+          const guestsInput = li.querySelector(".edit-guests");
+          const newGuests = guestsInput && guestsInput.value !== "" ? guestsInput.value : 0;
+          const noteInput = li.querySelector(".edit-note");
+          const newNote = noteInput ? noteInput.value : "";
           if (!newName) return alert("Enter name");
           await postData({
             action: "update",
