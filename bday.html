@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="//www.google.com/jsapi"></script>
+  <script>
+    window.parent.maeExportApis_();
+  </script>
+
+
+
+  <meta charset="UTF-8">
+  <title>Birthday Guest List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext y='50%25' x='50%25' dominant-baseline='middle' text-anchor='middle' font-size='42'%3E🎉%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0f172a;
+
+      --card: #0b1226;
+
+      --ink: #e5e7eb;
+
+      --muted: #9ca3af;
+
+      --accent: #6366f1;
+
+      --accent-2: #22d3ee;
+
+      --danger: #ef4444;
+
+      --ok: #10b981;
+
+      --warn: #f59e0b;
+
+      --shadow: 0 10px 25px rgba(0, 0, 0, .35);
+      --radius: 16px;
+      --maxw: 600px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(160deg, #0f172a 0%, #111827 100%);
+      color: var(--ink);
+      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    a {
+      color: var(--accent-2);
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 24px auto 80px;
+      padding: 0 16px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .lead {
+      margin: 2rem auto;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: #222;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+      color: #eee;
+      line-height: 1.6;
+      text-align: left
+    }
+
+    h1 {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      margin: 8px 0;
+    }
+
+    p.lead {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    @media(min-width: 680px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+
+    }
+
+    .card {
+      background: radial-gradient(1200px 400px at top right, rgba(34, 211, 238, .07), transparent 40%),
+        radial-gradient(1000px 600px at -10% 120%, rgba(99, 102, 241, .09), transparent 40%),
+        var(--card);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin: 0 0 4px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0 0 10px;
+      font-size: .95rem;
+    }
+
+    .location {
+      font-weight: bold;
+      margin: 0;
+      font-size: 1rem;
+    }
+    .address {
+      color: var(--muted);
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .row .name {
+      width: 100%;
+    }
+
+    .row .guests {
+      width: 50px;
+      max-width: 50px;
+      justify-self: end;
+    }
+
+    .row .cta {
+      width: 100%;
+
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select,
+    button {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, .15);
+      background: rgba(255, 255, 255, .03);
+      color: var(--ink);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color .15s, transform .02s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, .15) inset;
+    }
+
+    button {
+      background: linear-gradient(180deg, rgba(99, 102, 241, .95), rgba(67, 56, 202, .95));
+      border-color: rgba(255, 255, 255, .12);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .btn-danger {
+      background: linear-gradient(180deg, rgba(239, 68, 68, .95), rgba(185, 28, 28, .95));
+    }
+
+    .btn-save {
+      background: linear-gradient(180deg, rgba(16, 185, 129, .95), rgba(5, 150, 105, .95));
+    }
+
+    .btn-cancel {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    ul.entries {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+      display: grid;
+    }
+
+    .entry {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .entry .meta {
+      white-space: pre-wrap;
+    }
+
+    .entry small {
+      color: var(--muted);
+    }
+
+    .edit-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .edit-row .guests {
+      width: 64px;
+      max-width: 64px;
+    }
+
+    .note-area {
+      width: 100%;
+      min-height: 64px;
+      resize: vertical;
+    }
+
+    footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    .status {
+      position: fixed;
+      inset: auto 16px 16px 16px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      background: rgba(17, 24, 39, .9);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: var(--ink);
+      padding: 10px 12px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.ok {
+      border-color: rgba(16, 185, 129, .5);
+    }
+
+    .status.warn {
+      border-color: rgba(245, 158, 11, .5);
+    }
+
+    .status.err {
+      border-color: rgba(239, 68, 68, .5);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>🎉 Birthday Event Planner</h1>
+
+      <p class="lead">
+        Hey friends, it’s me… but imagine this being read in my voice, with the perfect
+        blend of charm, sarcasm, and mild desperation. I’m throwing a birthday extravaganza
+        that includes brunch, movies, bowling, bars, and just enough questionable decisions
+        to make it memorable. I’d very much love your company—it’ll be way less awkward than
+        me eating pancakes alone. You <em>can</em> feel free to bring a guest under the condition
+        that they’re a mutual friend and I don't owe them money. Otherwise, it gets weird fast 
+        and nobody wants that. 
+      </p>
+      <hr>
+      <p class="lead">
+        Please RSVP by <strong>Sunday, September 28</strong> so I can look like an adult
+        who actually plans things. Cool? Cool.
+      </p>
+
+    </header>
+
+    <main class="grid" id="cards">
+
+
+      <section class="card" data-section="Brunch Kickoff">
+        <h2>🥐 Brunch Kickoff - 11 AM</h2>
+        <p class="subtitle">Late morning meet-up to start the day right.</p>
+
+        <ul class="entries" data-list="">
+          <p class="location">The VIG</p>
+          <p class="address">1527 N Wells Street -
+            <a href="https://www.google.com/maps/place/The+VIG/@41.909919,-87.6370502,17z/data=!3m1!4b1!4m6!3m5!1s0x880fd346b685df23:0xde8293bbba139411!8m2!3d41.909915!4d-87.6344753!16s%2Fg%2F11bycht8hp?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank" rel="noopener noreferrer">Map</a>
+          </p>
+          <br />
+          <p class="subtitle"><em>The restaurant is about as vegan-friendly as a Texas barbecue, so if
+            that’s a deal breaker, I apologize in advance. I’ll make it up to you with bad jokes and
+            questionable life choices.</em></p>
+            <p class="subtitle">RSVP is a <u>must</u> for this one.</p>
+        </ul>
+      </section>
+
+
+      <section class="card" data-section="Matinee Movie">
+        <h2>🎬 Matinee Movie - 2 PM</h2>
+        <p class="subtitle">Catch a horror film together and make new nightmares.</p>
+
+        <ul class="entries" data-list="">
+          <p class="location">AMC NEWCITY 14</p>
+          <p class="address">1500 N Clybourn Avenue -
+            <a href="https://www.google.com/maps/place/AMC+NEWCITY+14/@41.9086358,-87.6651197,15z/data=!3m1!4b1!4m6!3m5!1s0x880fd33b03887259:0xc09e8642fc9b94d!8m2!3d41.9086213!4d-87.6466657!16s%2Fg%2F11bxg0r0p4?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank" rel="noopener noreferrer">Map</a>
+          </p>
+          <br />
+          <p class="subtitle">
+            <em>
+              The movie selection is <strong>"Bone Lake"</strong> as I always lean towards a horror flick
+              because nothing says "birthday fun" like collectively
+              screaming at the screen.
+              </em>
+          </p>
+          <p class="subtitle">
+            <em>
+              You're gonna have to buy your own tickets for this one (I know, I know, how
+              rude of me). I’ll most likely be seated dead center, right behind the wheelchair section,
+              silently judging the popcorn-to-butter ratio around me.
+            </em>
+          </p>
+        </ul>
+      </section>
+
+
+      <section class="card" data-section="Bowling Bash">
+        <h2>🎳 Bowling Bash - 3 PM</h2>
+        <p class="subtitle">Friendly frames and bragging rights.</p>
+
+        <ul class="entries" data-list="">
+          <p class="location">Kings Dining & Entertainment</p>
+          <p class="address">1500 N Clybourn Ave, Chicago, IL 60610
+            <a href="https://www.google.com/maps/place/Kings+Dining+%26+Entertainment/@41.9083868,-87.6489041,16z/data=!3m2!4b1!5s0x870e77bd0fe4a887:0x23242928d90973b7!4m6!3m5!1s0x880fd33b1e992825:0x2c2c0f40ff53ab7a!8m2!3d41.9083828!4d-87.6463292!16s%2Fg%2F11bwkhx2wv?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank" rel="noopener noreferrer">Map</a>
+          </p>
+          <br />
+          <p class="subtitle">
+            <em>
+              Bowling will set you back $21 plus $3 for shoes, which is a small price to 
+              pay for me promising a sloppy kiss if you manage to bowl a turkey. No refunds.
+            </em>
+          </p>
+        </ul>
+      </section>
+
+
+      <section class="card" data-section="Dinner &amp; Drinks">
+        <h2>🍽️ Dinner &amp; Drinks - 6pm</h2>
+        <p class="subtitle">Evening bites and toasts.</p>
+
+        <ul class="entries" data-list="">
+          <p class="location">Tecalitlan Mexican Kitchen & Margarita Bar</p>
+          <p class="subtitle">1538 N Clybourn Avenue - 
+            <a href="https://www.google.com/maps/place/TECALITLAN+MEXICAN+KITCHEN+%26+MARGARITA+BAR/@41.909289,-87.6500943,16z/data=!3m1!4b1!4m6!3m5!1s0x880e2d34aac6adff:0xb03f4ed90a1419d6!8m2!3d41.909285!4d-87.6475194!16s%2Fg%2F1thsrzhj?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank" rel="noopener noreferrer">Map</a>
+          </p>
+          <br />
+          <p class="subtitle">
+            <em>
+              Let's replenish our depleted calories from all that healthy competition the way nature intended, with nachos and margaritas.
+              It’s basically science 
+            </em>
+          </p>
+
+        </ul>
+      </section>
+
+
+      <section class="card" data-section="Late-Night Hangout">
+        <h2>🕺 Late-Night Hangout - 10 PM</h2>
+        <p class="subtitle">Chill at a bar or hop around and keep the vibes going.</p>
+
+        <ul class="entries" data-list="">
+          <p class="location">TBD</p>
+          <p class="subtitle">Where the good vibes are</p>
+        </ul>
+      </section>
+
+
+      <section class="card" data-section="CantMakeIt">
+        <h2>🚫 Can’t Make It</h2>
+        <p class="subtitle">Let us know you love us in spirit. 💙</p>
+        <form class="row" data-form="">
+          <label class="sr-only" for="name-nope">Your first name</label>
+          <input id="name-nope" class="name" name="name" type="text" placeholder="Your first name"
+            required="">
+
+          <input class="guests" name="guests" type="number" min="0" step="1" value="0" hidden="">
+          <button class="cta" type="submit">Count Me In</button>
+        </form>
+        <div style="margin-top:8px;">
+          <label for="note-nope" class="sr-only">Add a note (optional)</label>
+          <textarea id="note-nope" class="note-area"
+            placeholder="Optional message (e.g., “Out of town—have an amazing day!”)"></textarea>
+        </div>
+        <ul class="entries" data-list=""></ul>
+      </section>
+    </main>
+
+    <footer>
+      <div id="totals"></div>
+      <p style="margin-top:8px;">Tip: If you ever see an error, try again in a few seconds (Apps
+        Script may be waking up).</p>
+    </footer>
+  </div>
+
+  <div class="status" role="status" aria-live="polite" id="status"></div>
+
+  <script>
+    const qs = (s, el = document) => el.querySelector(s);
+    const qsa = (s, el = document) => [...el.querySelectorAll(s)];
+    const statusEl = qs('#status');
+
+    function toast(msg, kind = 'ok', timeout = 2600) {
+      statusEl.textContent = msg;
+      statusEl.className = `status show ${kind}`;
+      window.clearTimeout(toast._t);
+      toast._t = setTimeout(() => {
+        statusEl.className = 'status';
+      }, timeout);
+    }
+
+    function formatWhen(ts) {
+      const d = new Date(ts);
+      if (isNaN(d)) return '';
+      return d.toLocaleString();
+    }
+
+
+    const SECTION_KEYS = [
+      'Brunch Kickoff',
+      'Matinee Movie',
+      'Bowling Bash',
+      'Dinner & Drinks',
+      'Late-Night Hangout',
+      'CantMakeIt'
+    ];
+
+    const state = {
+
+      byId: new Map(),
+
+      buckets: new Map(SECTION_KEYS.map(k => [k, []])),
+    };
+
+
+    function renderAll() {
+
+      for (const k of SECTION_KEYS) {
+        state.buckets.set(k, []);
+      }
+
+      state.byId.forEach(entry => {
+        if (!state.buckets.has(entry.section)) state.buckets.set(entry.section, []);
+        state.buckets.get(entry.section).push(entry.id);
+      });
+
+
+      qsa('section.card').forEach(sec => {
+        const sectionKey = sec.dataset.section;
+        const list = qs('[data-list]', sec);
+        list.innerHTML = '';
+
+        const ids = state.buckets.get(sectionKey) || [];
+        ids.forEach(id => list.appendChild(renderEntry(state.byId.get(id), sectionKey)));
+      });
+
+      renderTotals();
+    }
+
+    function renderEntry(entry, sectionKey) {
+      const li = document.createElement('li');
+      li.className = 'entry';
+      li.dataset.id = entry.id;
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+
+      if (sectionKey === 'CantMakeIt') {
+        meta.innerHTML = `<strong>${escapeHtml(entry.name)}</strong>` +
+          (entry.note ? `<br><small>“${escapeHtml(entry.note)}”</small>` : '') +
+          (entry.timestamp ? `<br><small>${escapeHtml(formatWhen(entry.timestamp))}</small>` : '');
+      } else {
+        const g = Number(entry.guests || 0);
+        meta.innerHTML = `<strong>${escapeHtml(entry.name)}</strong>` +
+          ` <small>+${g} guest${g===1?'':'s'}</small>` +
+          (entry.timestamp ? `<br><small>${escapeHtml(formatWhen(entry.timestamp))}</small>` : '');
+      }
+
+      const btnUpdate = document.createElement('button');
+      btnUpdate.className = 'btn-ghost';
+      btnUpdate.textContent = 'Update';
+      btnUpdate.addEventListener('click', () => enterEditMode(li, entry, sectionKey));
+
+      const btnDelete = document.createElement('button');
+      btnDelete.className = 'btn-danger';
+      btnDelete.textContent = 'Delete';
+      btnDelete.addEventListener('click', async () => {
+        btnDelete.disabled = true;
+        const res = await call('deleteEntry', {
+          id: entry.id
+        });
+        if (res.ok) {
+          state.byId.delete(entry.id);
+          renderAll();
+          toast('Entry deleted.', 'ok');
+        } else {
+          toast('Delete failed: ' + (res.error || 'Unknown error'), 'err', 4000);
+          btnDelete.disabled = false;
+        }
+      });
+
+      li.append(meta, btnUpdate, btnDelete);
+      return li;
+    }
+
+    function enterEditMode(li, entry, sectionKey) {
+      li.innerHTML = '';
+
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.value = entry.name;
+      nameInput.className = 'name';
+      nameInput.setAttribute('aria-label', 'Edit name');
+
+      let guestsInput;
+      let noteArea;
+
+      if (sectionKey === 'CantMakeIt') {
+        noteArea = document.createElement('textarea');
+        noteArea.className = 'note-area';
+        noteArea.placeholder = 'Optional message';
+        noteArea.value = entry.note || '';
+
+        const row = document.createElement('div');
+        row.className = 'edit-row';
+
+        guestsInput = document.createElement('input');
+        guestsInput.type = 'number';
+        guestsInput.value = 0;
+        guestsInput.className = 'guests';
+        guestsInput.hidden = true;
+
+        const btnSave = document.createElement('button');
+        btnSave.className = 'btn-save';
+        btnSave.textContent = 'Save';
+        btnSave.addEventListener('click', async () => {
+          btnSave.disabled = true;
+          const payload = {
+            id: entry.id,
+            name: nameInput.value.trim(),
+            note: noteArea.value.trim()
+          };
+          if (!payload.name) {
+            toast('Please enter a name.', 'warn');
+            btnSave.disabled = false;
+            return;
+          }
+          const res = await call('updateEntry', payload);
+          if (res.ok) {
+            state.byId.set(res.data.id, res.data);
+            renderAll();
+            toast('Saved.', 'ok');
+          } else {
+            toast('Update failed: ' + (res.error || 'Unknown error'), 'err', 4000);
+            btnSave.disabled = false;
+          }
+        });
+
+        const btnCancel = document.createElement('button');
+        btnCancel.className = 'btn-cancel';
+        btnCancel.textContent = 'Cancel';
+        btnCancel.addEventListener('click', () => {
+          li.replaceWith(renderEntry(entry, sectionKey));
+        });
+
+        row.append(nameInput, btnSave, btnCancel);
+        li.append(row, noteArea);
+      } else {
+        guestsInput = document.createElement('input');
+        guestsInput.type = 'number';
+        guestsInput.min = '0';
+        guestsInput.step = '1';
+        guestsInput.value = Number(entry.guests || 0);
+        guestsInput.className = 'guests';
+        guestsInput.setAttribute('aria-label', 'Edit number of guests');
+
+        const row = document.createElement('div');
+        row.className = 'edit-row';
+
+        const btnSave = document.createElement('button');
+        btnSave.className = 'btn-save';
+        btnSave.textContent = 'Save';
+        btnSave.addEventListener('click', async () => {
+          btnSave.disabled = true;
+          const payload = {
+            id: entry.id,
+            name: nameInput.value.trim(),
+            guests: clampInt(guestsInput.value)
+          };
+          if (!payload.name) {
+            toast('Please enter a name.', 'warn');
+            btnSave.disabled = false;
+            return;
+          }
+          const res = await call('updateEntry', payload);
+          if (res.ok) {
+            state.byId.set(res.data.id, res.data);
+            renderAll();
+            toast('Saved.', 'ok');
+          } else {
+            toast('Update failed: ' + (res.error || 'Unknown error'), 'err', 4000);
+            btnSave.disabled = false;
+          }
+        });
+
+        const btnCancel = document.createElement('button');
+        btnCancel.className = 'btn-cancel';
+        btnCancel.textContent = 'Cancel';
+        btnCancel.addEventListener('click', () => {
+          li.replaceWith(renderEntry(entry, sectionKey));
+        });
+
+        row.append(nameInput, guestsInput, btnSave, btnCancel);
+        li.append(row);
+      }
+    }
+
+    function renderTotals() {
+
+      let totalPeople = 0;
+      let perSection = [];
+      for (const s of SECTION_KEYS) {
+        if (s === 'CantMakeIt') continue;
+        const ids = state.buckets.get(s) || [];
+        let sum = 0;
+        ids.forEach(id => {
+          const e = state.byId.get(id);
+          sum += 1 + Number(e.guests || 0);
+        });
+        perSection.push(`${s}: ${sum}`);
+        totalPeople += sum;
+      }
+      qs('#totals').textContent =
+        `Total RSVPs across events (including +guests): ${totalPeople} | ` + perSection.join(' • ');
+    }
+
+
+    qsa('section.card').forEach(sec => {
+      const form = qs('[data-form]', sec);
+      const list = qs('[data-list]', sec);
+      const sectionKey = sec.dataset.section;
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const name = (fd.get('name') || '').toString().trim();
+        let guests = clampInt(fd.get('guests'));
+        if (!name) {
+          toast('Please enter your first name.', 'warn');
+          return;
+        }
+        if (sectionKey === 'CantMakeIt') {
+          const note = (qs('#note-nope') ? qs('#note-nope').value : '').toString().trim();
+          await submitAdd({
+            section: sectionKey,
+            name,
+            guests: 0,
+            note
+          }, form, sectionKey);
+        } else {
+          await submitAdd({
+            section: sectionKey,
+            name,
+            guests
+          }, form, sectionKey);
+        }
+      });
+    });
+
+    async function submitAdd(payload, form, sectionKey) {
+      try {
+        const res = await call('addEntry', payload);
+        if (res.ok) {
+          state.byId.set(res.data.id, res.data);
+          renderAll();
+          form.reset();
+          if (sectionKey === 'CantMakeIt') {
+            const t = qs('#note-nope');
+            if (t) t.value = '';
+          }
+          toast('Added! 🎉', 'ok');
+        } else {
+          toast('Add failed: ' + (res.error || 'Unknown error'), 'err', 4000);
+        }
+      } catch (e) {
+        toast('Network or server error. Try again.', 'err', 4000);
+      }
+    }
+
+
+    function call(fnName, payload) {
+
+      return new Promise((resolve) => {
+        if (!google || !google.script || !google.script.run) {
+          resolve({
+            ok: false,
+            error: 'Apps Script bridge unavailable.'
+          });
+          return;
+        }
+
+        google.script.run
+          .withSuccessHandler(res => resolve(res))
+          .withFailureHandler(err => resolve({
+            ok: false,
+            error: String(err && err.message || err)
+          }))[fnName](payload);
+      });
+    }
+
+
+    function clampInt(v) {
+      const n = parseInt(v, 10);
+      if (Number.isFinite(n) && n >= 0) return n;
+      return 0;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"'`=\/]/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '/': '&#x2F;',
+        '`': '&#x60;',
+        '=': '&#x3D;'
+      } [c]));
+    }
+
+
+    (async function init() {
+      const res = await call('getAllEntries');
+      if (res.ok) {
+
+        (res.data || []).forEach(item => {
+          state.byId.set(item.id, item);
+        });
+        renderAll();
+      } else {
+        toast('Failed to load entries: ' + (res.error || 'Unknown error'), 'err', 5000);
+      }
+    })();
+  </script>
+
+
+
+</body>
+
+</html>
