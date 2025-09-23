@@ -10,7 +10,7 @@
 
 
   <meta charset="UTF-8">
-  <title>Birthday Guest List</title>
+  <title>Birthday Event Planner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="icon"
@@ -81,12 +81,14 @@
 
     h1 {
       font-size: clamp(1.4rem, 3.5vw, 2rem);
-      margin: 16px 0 0;
+      margin: 3rem 0 0 5.5rem;
+      text-align: left;
     }
 
     h2 {
       font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-      margin: 0 0 16px 0;
+      margin: 0rem 0 2rem 6rem;
+      text-align: left;
     }
 
     p.lead {
@@ -258,6 +260,7 @@
 
     footer {
       margin-top: 18px;
+      margin-bottom: 24px;
       color: var(--muted);
       font-size: .9rem;
       text-align: center;
@@ -310,8 +313,12 @@
 <body>
   <div class="wrap">
     <header>
-      <h1>🎉 Birthday Event Planner</h1>
+      <h1>Birthday Event Planner</h1>
       <h2>Saturday, October 4th</h2>
+
+      <img src="./assets/img/scheming.png" alt="scheming cartoon character" width="125" height="125"
+        style="border-radius: 50%;box-shadow: var(--shadow);float: left;margin: -8rem 0 0 -1.5rem; display: inline;"
+        loading="lazy">
 
       <p class="lead">
         Hey friends, it’s me… but imagine this being read in my voice, with the perfect
@@ -347,7 +354,7 @@
           <p class="subtitle"><em>The restaurant is about as vegan-friendly as a Texas barbecue, so if
             that’s a deal breaker, I apologize in advance. I’ll make it up to you with bad jokes and
             questionable life choices.</em></p>
-            <p class="subtitle">RSVP is a <u>must</u> for this one.</p>
+            <p class="subtitle">RSVP is a <strong>must</strong> for this one.</p>
         </ul>
       </section>
 
@@ -365,14 +372,17 @@
           <br />
           <p class="subtitle">
             <em>
-              The movie selection is <strong>"Bone Lake"</strong> as I always lean towards a horror flick
-              because nothing says "birthday fun" like collectively
+              The movie selection is "<a href="https://www.youtube.com/watch?v=mQy7BuW-R6c"
+                  target="_blank" rel="noopener noreferrer">Bone Lake</a>" as I always
+              lean towards a horror flick because nothing says "birthday fun" like collectively
               screaming at the screen.
-              </em>
+            </em>
           </p>
           <p class="subtitle">
             <em>
-              You're gonna have to buy your own tickets for this one (I know, I know, how
+              You're gonna have to buy your own <a
+                href="https://www.amctheatres.com/showtimes/136592319/seats" target="_blank"
+                rel="noopener noreferrer">tickets</a> for this one (I know, I know, how
               rude of me). I’ll be seated dead center, right behind the wheelchair section,
               silently judging the popcorn-to-butter ratio around me.
             </em>
