@@ -187,15 +187,31 @@
       box-shadow: 0 0 0 3px rgba(34, 211, 238, .15) inset;
     }
 
-    button {
+    .button {
       background: linear-gradient(180deg, rgba(99, 102, 241, .95), rgba(67, 56, 202, .95));
       border-color: rgba(255, 255, 255, .12);
       font-weight: 600;
       cursor: pointer;
     }
 
-    button:active {
+    .button {
+      color: var(--ink);
+      padding: 12px 16px;
+      border-radius: 12px;
+      transition: border-color .15s, transform .02s;
+      text-decoration: none;
+      float: right;
+    }
+
+
+    .button:active {
       transform: translateY(1px);
+    }
+
+    .button.rsvp {
+      float: right;
+      margin-top: -25px;
+      margin-right: 16px; position: relative;
     }
 
     .btn-ghost {
@@ -314,25 +330,34 @@
   <div class="wrap">
     <header>
       <h1>Birthday Event Planner</h1>
-      <h2>Saturday, October 4th</h2>
+      <h2>Saturday, October 3rd</h2>
 
       <img src="./assets/img/scheming.png" alt="scheming cartoon character" width="125" height="125"
         style="border-radius: 50%;box-shadow: var(--shadow);float: left;margin: -8rem 0 0 -1.5rem; display: inline;"
         loading="lazy">
 
+      <!-- <a class="button rsvp" href="#">RSVP</a> -->
+
       <p class="lead">
-        Hey friends, it’s me… but imagine this being read in my voice, with the perfect
-        blend of charm, sarcasm, and mild desperation. I’m throwing a birthday extravaganza
-        that includes brunch, movies, bowling, bars, and just enough questionable decisions
-        to make it memorable. I’d very much love your company—it’ll be way less awkward than
-        me eating pancakes alone. You <em>can</em> feel free to bring a guest under the condition
-        that they’re a mutual friend and I don't owe them money. Otherwise, it gets weird fast 
-        and nobody wants that. 
+        Hello friends, it's that time again. I’m throwing an all day birthday extravaganza
+        with brunch, cinema, sweets, games, and just enough questionable decisions
+        to make it memorable. So come join the fun with this à la carte (pick your poison) celebration with yours truly.
       </p>
       <hr>
       <p class="lead">
-        Please RSVP via text by <strong>Sunday, September 28</strong> so I can look like an adult
-        who actually plans things. Cool? Cool.
+        We'll be frolicking in the heart of Bucktown where all the rendezvous points are within a 30 minute walking distance
+        from each other.
+      </p>
+      <br />
+      <p class="lead">
+        <strong>Please RSVP within the next 2-3 days for brunch and WhirlyBall. Our friendship may hinge on your
+          ability to follow instructions.</strong>
+      </p>
+      <br />
+      <p class="subtitle" style="color: var(--danger)">
+        <strong>Event details subject to change depending on RSVPs and general bad luck</strong></p>
+      <p class="subtitle">
+        <em>* Plus-ones dependent on event and available space.</em>
       </p>
 
     </header>
@@ -341,106 +366,145 @@
 
 
       <section class="card" data-section="Brunch Kickoff">
-        <h2>🥐 Brunch Kickoff - 11 AM</h2>
+        <h2>🥞 Brunch Kickoff: 11 AM - 1 PM
+          <span style="color: var(--danger); margin-bottom: 0">[TBD Sept]</span>
+        </h2>
+        <p class="subtitle" style="color: var(--danger)">Time will change to 2pm if movie cancelled</p>
+
         <p class="subtitle">Late morning meet-up to start the day right.</p>
 
         <ul class="entries" data-list="">
-          <p class="location">The VIG</p>
-          <p class="address">1527 N Wells Street -
-            <a href="https://www.google.com/maps/place/The+VIG/@41.909919,-87.6370502,17z/data=!3m1!4b1!4m6!3m5!1s0x880fd346b685df23:0xde8293bbba139411!8m2!3d41.909915!4d-87.6344753!16s%2Fg%2F11bycht8hp?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
+          <p class="location">Boulevard Bistro</p>
+          <p class="address">2753 N Western Avenue -
+            <a href="https://maps.app.goo.gl/3rg5GT78E1WMFXys5"
             target="_blank" rel="noopener noreferrer">Map</a>
           </p>
           <br />
-          <p class="subtitle"><em>The restaurant is about as vegan-friendly as a Texas barbecue, so if
-            that’s a deal breaker, I apologize in advance. I’ll make it up to you with bad jokes and
-            questionable life choices.</em></p>
-            <p class="subtitle">RSVP is a <strong>must</strong> for this one.</p>
+          <p class="subtitle">
+            <em>
+              Let's start off with some good food, friendly vibes, and plenty of "I shouldn't have eaten all of that" energy.
+              They even got gluten free French toast. Winning!
+            </em>
+          </p>
+          <p class="subtitle" style="color:var(--ink)">
+            <a href="https://partiful.com/e/hMjuznLRKONSrn1NGldo?c=xnyxmzjG"
+            target="_blank" rel="noopener noreferrer">RSVP</a> here to brake bread with me. <br />(
+            <em>First come first serve - Limit of 10 people - Sorry </em>) 😥
+          </p>
+
         </ul>
       </section>
 
 
       <section class="card" data-section="Matinee Movie">
-        <h2>🎬 Matinee Movie - 2 PM</h2>
-        <p class="subtitle">Catch a horror film together and make new nightmares.</p>
-
+        <h2>🧟‍♂️ Matinee Movie: ❔❔ PM 
+          <span style="color: var(--danger); margin-bottom: 0">[TBD Sept]</span>
+        </h2>
+        <p class="subtitle" style="color: var(--danger)">Will cancel if not showing at this theater</p>
+        <p class="subtitle">Watch a horror flick together and make new nightmares.</p>
         <ul class="entries" data-list="">
-          <p class="location">AMC NEWCITY 14</p>
-          <p class="address">1500 N Clybourn Avenue -
-            <a href="https://www.google.com/maps/place/AMC+NEWCITY+14/@41.9086358,-87.6651197,15z/data=!3m1!4b1!4m6!3m5!1s0x880fd33b03887259:0xc09e8642fc9b94d!8m2!3d41.9086213!4d-87.6466657!16s%2Fg%2F11bxg0r0p4?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
+          <p class="location"><s>Regal City North</s></p>
+          <p class="address">2600 N Western Avenue -
+            <a href="https://maps.app.goo.gl/mT9EjaxYyy1g5EW5A"
               target="_blank" rel="noopener noreferrer">Map</a>
           </p>
           <br />
           <p class="subtitle">
             <em>
-              The movie selection is "<a href="https://www.youtube.com/watch?v=mQy7BuW-R6c"
-                  target="_blank" rel="noopener noreferrer">Bone Lake</a>" as I always
-              lean towards a horror flick because nothing says "birthday fun" like collectively
-              screaming at the screen.
+              The movie selection is "<a 
+              href="https://youtu.be/mNd1gb19A-c?si=W_VwD88mlNxgdueX"
+              target="_blank" rel="noopener noreferrer">Resident Evil</a>", because apparently
+              I've decided that a relaxing birthday afternoon should involve zombies, monsters, and
+              bad survival instincts.
             </em>
           </p>
           <p class="subtitle">
             <em>
-              You're gonna have to buy your own <a
-                href="https://www.amctheatres.com/showtimes/136592319/seats" target="_blank"
-                rel="noopener noreferrer">tickets</a> for this one (I know, I know, how
-              rude of me). I’ll be seated dead center, right behind the wheelchair section,
-              silently judging the popcorn-to-butter ratio around me.
+              If it works out, buy your tickets early when the movie comes out mid September. 
+              I’ll be seated strategically so I can silently judge the popcorn-to-butter 
+              ratio around me.
             </em>
+          </p>
+          <!-- 
+          <p class="subtitle">
+            <em>
+              You're gonna have to buy your own <a href="#" target="_blank"
+                rel="noopener noreferrer">tickets</a> for this one (I know, I know, how
+              rude of me). I’ll be seated strategically so I can silently judge the
+              popcorn-to-butter
+              ratio around me.
+            </em>
+          </p>
+          -->
+          <p class="subtitle" style="color:var(--ink)">
+            <a href="https://partiful.com/e/HiyThC77MvyBmTGYhbY3?c=A0jLVMSP"
+              target="_blank" rel="noopener noreferrer">RSVP</a> here to demonstrate your good taste in movies.
           </p>
         </ul>
       </section>
 
-
-      <section class="card" data-section="Bowling Bash">
-        <h2>🎳 Bowling Bash - 4 PM</h2>
-        <p class="subtitle">Friendly frames and bragging rights.</p>
+      <section class="card" data-section="Ice Cream">
+        <h2>🍨 Ice Cream Pit Stop: 4 PM - 5 PM</h2>
+        <p class="subtitle">A brief detour for something sweet and completely unnecessary.</p>
 
         <ul class="entries" data-list="">
-          <p class="location">Kings Dining & Entertainment</p>
-          <p class="address">1500 N Clybourn Avenue - 
-            <a href="https://www.google.com/maps/place/Kings+Dining+%26+Entertainment/@41.9083868,-87.6489041,16z/data=!3m2!4b1!5s0x870e77bd0fe4a887:0x23242928d90973b7!4m6!3m5!1s0x880fd33b1e992825:0x2c2c0f40ff53ab7a!8m2!3d41.9083828!4d-87.6463292!16s%2Fg%2F11bwkhx2wv?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
+          <p class="location">Margie's Candies</p>
+          <p class="address">1960 N Western Avenue -
+            <a href="https://maps.app.goo.gl/9rgV3MG65CBnC5rW9"
               target="_blank" rel="noopener noreferrer">Map</a>
           </p>
           <br />
           <p class="subtitle">
             <em>
-              Bowling will set you back $21 plus $3 for shoes, which is a small price to 
+              Because apparently watching people get eaten by zombies isn't enough excitement for one afternoon.
+              We'll make a quick stop for ice cream and pretend this is an essential part of a balanced birthday diet.
+            </em>
+          </p>
+          <p class="subtitle" style="color:var(--ink)">
+            <a href="https://partiful.com/e/LIwlq9nqYNcWcdW2E6BC?c=koR7b3xG"
+              target="_blank" rel="noopener noreferrer">RSVP</a> here to share in the diabetes.  
+          </p>
+        </ul>
+      </section>
+
+      <section class="card" data-section="Bowling Bash">
+        <h2>🏆 The Main Event: 6 PM - 10 PM</h2>
+        <p class="subtitle">Friendly competition, laughable athletic ability, and bragging rights.</p>
+
+        <ul class="entries" data-list="">
+          <p class="location">WhirlyBall</p>
+          <p class="address">1825 W Webster Avenue - 
+            <a href="https://maps.app.goo.gl/nooz25wsS5GtX1K9A"
+              target="_blank" rel="noopener noreferrer">Map</a>
+          </p>
+          <br />
+          <p class="subtitle">
+            <em>
+              We're making double the impact with strikes and collisions. Come prepared to discover
+              whether you have the competitive spirit of a champion or the driving skills of someone 
+              who should probably be taking taking public transportation.
+            </em>
+          </p>
+          <p class="subtitle">
+            <em>
+              Bowling will cost you $25 with shoes, which is a small price to 
               pay for me promising a sloppy kiss if you manage to bowl a turkey. No refunds.
             </em>
           </p>
-        </ul>
-      </section>
-
-
-      <section class="card" data-section="Dinner &amp; Drinks">
-        <h2>🍽️ Dinner &amp; Drinks - 6pm</h2>
-        <p class="subtitle">Evening bites and toasts.</p>
-
-        <ul class="entries" data-list="">
-          <p class="location">Tecalitlan Mexican Kitchen & Margarita Bar</p>
-          <p class="subtitle">1538 N Clybourn Avenue - 
-            <a href="https://www.google.com/maps/place/TECALITLAN+MEXICAN+KITCHEN+%26+MARGARITA+BAR/@41.909289,-87.6500943,16z/data=!3m1!4b1!4m6!3m5!1s0x880e2d34aac6adff:0xb03f4ed90a1419d6!8m2!3d41.909285!4d-87.6475194!16s%2Fg%2F1thsrzhj?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D"
-            target="_blank" rel="noopener noreferrer">Map</a>
+          <p class="subtitle" style="color:var(--ink)">
+            <a href="https://partiful.com/e/56klV7OpTVcpsinfaDzW?c=n-8iVdal" target="_blank"
+              rel="noopener noreferrer">RSVP</a> here for bowling (6:00pm - 7:30pm).
           </p>
-          <br />
           <p class="subtitle">
             <em>
-              Let's replenish our depleted calories from all that healthy competition the way nature intended, with nachos and margaritas.
-              It’s basically science 
+              WhirlyBall will set you back $10 - $20 depending on participants 
+              but you can't put a price on memories of how you got whiplash.
             </em>
           </p>
-
-        </ul>
-      </section>
-
-
-      <section class="card" data-section="Late-Night Hangout">
-        <h2>🕺 Late-Night Hangout - 10 PM</h2>
-        <p class="subtitle">Chill at a cool spot or hop around and keep the party going.</p>
-
-        <ul class="entries" data-list="">
-          <p class="location">TBD</p>
-          <p class="subtitle">Where the good vibes are</p>
+          <p class="subtitle" style="color:var(--ink)">
+            <a href="https://partiful.com/e/23bgOBOxB7zreQnRgKdb?c=D1gli7Y1" target="_blank"
+              rel="noopener noreferrer">RSVP</a> here for whirlyball (8pm - 10pm).
+          </p>
         </ul>
       </section>
     </main>
