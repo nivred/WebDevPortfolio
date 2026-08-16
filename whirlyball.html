@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="//www.google.com/jsapi"></script>
+  <script>
+    window.parent.maeExportApis_();
+  </script>
+
+
+
+  <meta charset="UTF-8">
+  <title>WhirlyBall Event Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext y='50%25' x='50%25' dominant-baseline='middle' text-anchor='middle' font-size='42'%3E🎉%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0f172a;
+
+      --card: #0b1226;
+
+      --ink: #e5e7eb;
+
+      --muted: #9ca3af;
+
+      --accent: #6366f1;
+
+      --accent-2: #22d3ee;
+
+      --danger: #ef4444;
+
+      --ok: #10b981;
+
+      --warn: #f59e0b;
+
+      --shadow: 0 10px 25px rgba(0, 0, 0, .35);
+      --radius: 16px;
+      --maxw: 600px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(160deg, #0f172a 0%, #111827 100%);
+      color: var(--ink);
+      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: var(--muted);
+      margin: 24px 0;
+    }
+
+    a {
+      color: var(--accent-2);
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 24px auto 80px;
+      padding: 0 16px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .lead {
+      margin: 2rem auto;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: #222;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+      color: #eee;
+      line-height: 1.6;
+      text-align: left
+    }
+
+    h1 {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      margin: 3rem 0 0 5.5rem;
+      text-align: left;
+    }
+
+    h2 {
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      margin: 0rem 0 2rem 6rem;
+      text-align: left;
+    }
+
+    p.lead {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    @media(min-width: 680px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+
+    }
+
+    .card {
+      background: radial-gradient(1200px 400px at top right, rgba(34, 211, 238, .07), transparent 40%),
+        radial-gradient(1000px 600px at -10% 120%, rgba(99, 102, 241, .09), transparent 40%),
+        var(--card);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin: 0 0 4px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0 0 10px;
+      font-size: .95rem;
+    }
+
+    .location {
+      font-weight: bold;
+      margin: 0;
+      font-size: 1rem;
+    }
+    .address {
+      color: var(--muted);
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .row .name {
+      width: 100%;
+    }
+
+    .row .guests {
+      width: 50px;
+      max-width: 50px;
+      justify-self: end;
+    }
+
+    .row .cta {
+      width: 100%;
+
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select,
+    button {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, .15);
+      background: rgba(255, 255, 255, .03);
+      color: var(--ink);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color .15s, transform .02s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, .15) inset;
+    }
+
+    .button {
+      background: linear-gradient(180deg, rgba(99, 102, 241, .95), rgba(67, 56, 202, .95));
+      border-color: rgba(255, 255, 255, .12);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .button {
+      color: var(--ink);
+      padding: 12px 16px;
+      border-radius: 12px;
+      transition: border-color .15s, transform .02s;
+      text-decoration: none;
+      float: right;
+    }
+
+
+    .button:active {
+      transform: translateY(1px);
+    }
+
+    .button.rsvp {
+      float: right;
+      margin-top: -25px;
+      margin-right: 16px; position: relative;
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .btn-danger {
+      background: linear-gradient(180deg, rgba(239, 68, 68, .95), rgba(185, 28, 28, .95));
+    }
+
+    .btn-save {
+      background: linear-gradient(180deg, rgba(16, 185, 129, .95), rgba(5, 150, 105, .95));
+    }
+
+    .btn-cancel {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    ul.entries {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+      display: grid;
+    }
+
+    .entry {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .entry .meta {
+      white-space: pre-wrap;
+    }
+
+    .entry small {
+      color: var(--muted);
+    }
+
+    .edit-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .edit-row .guests {
+      width: 64px;
+      max-width: 64px;
+    }
+
+    .note-area {
+      width: 100%;
+      min-height: 64px;
+      resize: vertical;
+    }
+
+    footer {
+      margin-top: 18px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    .status {
+      position: fixed;
+      inset: auto 16px 16px 16px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      background: rgba(17, 24, 39, .9);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: var(--ink);
+      padding: 10px 12px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.ok {
+      border-color: rgba(16, 185, 129, .5);
+    }
+
+    .status.warn {
+      border-color: rgba(245, 158, 11, .5);
+    }
+
+    .status.err {
+      border-color: rgba(239, 68, 68, .5);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>WhirlyBall Event Details</h1>
+      <h2>Welcome to the Party</h2>
+
+      <img src="./assets/img/scheming.png" alt="scheming cartoon character" width="125" height="125"
+        style="border-radius: 50%;box-shadow: var(--shadow);float: left;margin: -8rem 0 0 -1.5rem; display: inline;"
+        loading="lazy">
+
+      <a class="button" style="color: white; position: absolute; top: 12px; right: 12px; background: transparent;" 
+        href="./bday.html">
+        ✖
+      </a>
+
+      <p class="lead">
+        Attention all participants! Before you show up ready to eat, drink, and aggressively drive a WhirlyBall car, please
+        <a href="https://app.waiversign.com/e/5ea1b0af7b49730012bc37aa/doc/5ea1b1d8022b8000172dead5?eventName=Dervin%27s%20Birthday%20Bash!%20~%20%5BSat%2C%20Oct%203%2C%202026%5D&eventDate=2026-10-03T23:59:59.999Z"
+          target="_blank" rel="noopener noreferrer">sign the Waiver</a>
+        before the event so we can skip the boring paperwork and get straight to the fun.
+      </p>
+      <br />
+      <p class="lead">
+        <strong>Please arrive on time (6:00 PM)</strong>. Activities have specific time slots and rotations.
+      </p>
+
+    </header>
+
+    <hr>
+
+    <main class="grid" id="cards">
+
+      <h2 style="margin: 0; text-align: center;">What's Happening & What It Costs</h2>
+
+      <section class="card" data-section="Brunch Kickoff">
+        <h3 style="margin: 0 0 1rem 0;">Bowling - $25 per person</h3>
+        <p class="subtitle">
+          <strong>Two lanes, 6 people per lane, and one full hour of bowling</strong>.
+        </p>
+        <p class="subtitle">
+          Bring your A-game, your lucky socks, or whatever ritual you use to convince yourself that gutter
+          balls are intentional.
+        </p>
+
+        <!-- <p class="subtitle" style="color: var(--danger)">Time will change to 2pm if movie cancelled</p>
+        <p class="subtitle">Late morning meet-up to start the day right.</p>
+
+        <ul class="entries" data-list="">
+          <p class="location">Boulevard Bistro</p>
+          <p class="address">2753 N Western Avenue -
+            <a href="https://maps.app.goo.gl/3rg5GT78E1WMFXys5"
+            target="_blank" rel="noopener noreferrer">Map</a>
+          </p>
+          <br />
+          <p class="subtitle">
+            <em>
+              Let's start off with some good food, friendly vibes, and plenty of "I shouldn't have eaten all of that" energy.
+              They even got gluten free French toast. Winning!
+            </em>
+          </p>
+        </ul> -->
+      </section>
+
+      <section class="card">
+        <h3 style="margin: 0 0 1rem 0;">WhirlyBall - $25 per person</h3>
+        <p class="subtitle">
+          WhirlyBall is <strong>$25 for one hour</strong>, played in <strong>10-minute rounds</strong>.
+        </p>
+        <p class="subtitle">  
+          Only 10 people can play at a time, so please be prepared to rotate in and, most importantly, be
+          a good human and give someone else a turn when needed.
+        </p>
+      </section>
+
+      <section class="card">
+        <h3 style="margin: 0 0 1rem 0;">Alcohol - Cash Bar</h3>
+        <p class="subtitle">
+          While I cannot legally force you to consume an adult beverage, I will say that anecdotal evidence suggests that a little giggle juice could in fact sharpen skills and coordination under specific gaming conditions.
+        </p>
+        <p class="subtitle">
+          The bar will be open for those who wish to partake, but please drink responsibly and know your limits.
+        </p>
+      </section>
+
+      <section class="card">
+        <h3 style="margin: 0 0 1rem 0;">Dinner - FREE!</h3>
+        <p>
+          <strong>Food and beverages are on me.</strong>
+        </p>
+        <p class="subtitle">
+          I've picked out some menu options for the group as thanks for celebrating with me, so <strong>come hungry</strong>
+        </p>
+        <p class="subtitle">
+          Seriously, this is not the time to arrive having already eaten a "small little snack" that somehow
+          turned into a full meal.
+        </p>
+      </section>
+
+      <hr>
+
+      <h2 style="margin: 0; text-align: center;">Food Menu</h2>
+
+      <section class="card">
+        <h3 style="margin: 0; text-transform: uppercase; font-size: 1rem;">Appetizers</h3>
+        <ul class="entries">
+          <li><strong>Pretzel Bites</strong><br />
+            <span class="subtitle">Soft pretzel, cheddar beer cheese sauce, dark ale grain mustard</span></li>
+          <li><strong>Hummus</strong><br />
+            <span class="subtitle">Hummus, vegetables, warm pita</span></li>
+          <li><strong>Awesome Nachos</strong><br />
+            <span class="subtitle">Tri-color corn tortilla chips, refried beans, jack cheese, pepper jack cheese sauce, pickled jalapeños, pico de gallo, lime sour cream, green onions</span></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3 style="margin: 0; text-transform: uppercase; font-size: 1rem;">Wings</h3>
+        <ul class="entries">
+          <li><strong>Traditional Wings</strong><br />
+            <span class="subtitle">Pale ale beer-brined fresh jumbo wings, half Honey BBQ and half Buffalo</span></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3 style="margin: 0; text-transform: uppercase; font-size: 1rem;">Craft Pizzas</h3>
+        <ul class="entries">
+          <li><strong>Roasted Vegetable</strong> <em>(Gluten Free - Cauliflower Crust)</em><br />
+            <span class="subtitle">Zucchini, yellow squash, portabella, peppers, pesto, fresh mozzarella</span></li>
+          <li><strong>Caprese</strong><br />
+            <span class="subtitle">Traditional pizza sauce, fresh mozzarella, Roma tomatoes, fresh basil, balsamic glaze</span></li>
+          <li><strong>Italian Sausage &amp; Roasted Red Peppers</strong><br />
+            <span class="subtitle">Fresh Italian sausage, roasted red peppers, sliced garlic, pesto, mozzarella, basil</span></li>
+          <li><strong>The Classic Cheese with Pepperoni</strong><br />
+            <span class="subtitle">Traditional pizza sauce, mozzarella cheese, pepperoni</span></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3 style="margin: 0 0 1rem 0; text-transform: uppercase; font-size: 1rem;">Soft Drinks</h3>
+        <p class="subtitle">
+          Coke &bull; Diet Coke &bull; Sprite &bull; Orange Fanta &bull; Iced Tea &bull; Lemonade
+          &bull; Ginger Ale
+        </p>
+      </section>
+
+      <p class="subtitle" style="text-align: center"><strong>Come hungry. Come thirsty.<br />Come ready to play. <br />And please sign that waiver!</strong></p>
+
+    </main>
+
+  </div>
+
+  <div class="status" role="status" aria-live="polite" id="status"></div>
+
+  <footer>
+    <p>Made with ❤️ just for you</p>
+  </footer>
+
+
+</body>
+
+</html>
