@@ -255,6 +255,10 @@
       background: rgba(255, 255, 255, .03);
     }
 
+    .entries li {
+      margin-bottom: .5rem;
+    }
+
     .entry .meta {
       white-space: pre-wrap;
     }
@@ -343,8 +347,9 @@
         style="border-radius: 50%;box-shadow: var(--shadow);float: left;margin: -9rem 0 0 -1rem; display: inline;"
         loading="lazy">
 
-      <a class="button" style="position: absolute; top: 12px; right: 12px; background: transparent;" 
-        href="./bday.html">
+      <a style="color: none;position: absolute;top: 12px;right: 12px;background: transparent;border: 1px
+        solid var(--muted);border-radius: 50%;padding: 4px 4px;text-decoration: none;box-shadow:
+        var(--shadow);line-height: initial;" href="./bday.html">
         <span class="fa-close" aria-hidden="true" style="font-size: 1.5rem;">✖</span>
           <span class="sr-only">Close</span>
         </span>
@@ -368,10 +373,39 @@
 
     <main class="grid" id="cards">
 
-      <h2 style="margin: 0; text-align: center;">What's Happening & What It Costs</h2>
+      <h2 style="margin: 0; text-align: center;">What's Happening & How Much</h2>
+
+      <section class="card">
+        <h3 style="display: flex; justify-content: space-between; align-items: center; margin: 0 0 1rem 0;">
+          <span>Dinner - FREE!</span>
+          <span>6PM</span>
+        </h3>
+        <p>
+          <strong>Food and beverages are on me.</strong>
+        </p>
+        <p class="subtitle">
+          I picked out some goodies for you guys as thanks for celebrating with me, so
+          <strong>come hungry</strong> - <em>seriously.</em>
+        </p>
+      </section>
+
+      <section class="card">
+        <h3 style="display: flex; justify-content: space-between; align-items: center; margin: 0 0 1rem 0;">
+          <span>Alcohol - Cash Bar</span>
+          <span>6PM</span>
+        </h3>
+        <p class="subtitle">
+          While I cannot legally force you to consume an adult beverage, I will say that
+          anecdotal evidence suggests that a little giggle juice could in fact sharpen skills
+          and coordination under specific gaming conditions.
+        </p>
+      </section>
 
       <section class="card" data-section="Brunch Kickoff">
-        <h3 style="margin: 0 0 1rem 0;">Bowling - $25 per person</h3>
+        <h3 style="display: flex; justify-content: space-between; align-items: center; margin: 0 0 1rem 0;">
+          <span>Bowling - $25 per person</span>
+          <span>6PM</span>
+        </h3>
         <p class="subtitle">
           <strong>Two lanes, 6 people per lane, and one full hour of bowling</strong>.
         </p>
@@ -382,30 +416,16 @@
       </section>
 
       <section class="card">
-        <h3 style="margin: 0 0 1rem 0;">WhirlyBall - $25 per person</h3>
+        <h3 style="display: flex; justify-content: space-between; align-items: center; margin: 0 0 1rem 0;">
+          <span>WhirlyBall - $25 per person</span>
+          <span>8PM</span>
+        </h3>
         <p class="subtitle">
           WhirlyBall is <strong>$25 for one hour</strong>, played in <strong>10-minute rounds</strong>.
         </p>
         <p class="subtitle">  
           Only 10 people can play at a time, so please be prepared to rotate in and, most importantly, be
           a good human and give someone else a turn when needed.
-        </p>
-      </section>
-
-      <section class="card">
-        <h3 style="margin: 0 0 1rem 0;">Alcohol - Cash Bar</h3>
-        <p class="subtitle">
-          While I cannot legally force you to consume an adult beverage, I will say that anecdotal evidence suggests that a little giggle juice could in fact sharpen skills and coordination under specific gaming conditions.
-        </p>
-      </section>
-
-      <section class="card">
-        <h3 style="margin: 0 0 1rem 0;">Dinner - FREE!</h3>
-        <p>
-          <strong>Food and beverages are on me.</strong>
-        </p>
-        <p class="subtitle">
-          I picked out some goodies for you guys as thanks for celebrating with me, so <strong>come hungry</strong> - <em>seriously.</em>
         </p>
       </section>
 
@@ -436,7 +456,7 @@
       <section class="card">
         <h3 style="margin: 0; text-transform: uppercase; font-size: 1rem;">Craft Pizzas</h3>
         <ul class="entries">
-          <li><strong>Roasted Vegetable</strong> <em>(Gluten Free Cauliflower Crust)</em><br />
+          <li><strong>Roasted Vegetable</strong> <em>(GF - Cauliflower Crust)</em><br />
             <span class="subtitle">Zucchini, yellow squash, portabella, peppers, pesto, fresh mozzarella</span></li>
           <li><strong>Caprese</strong><br />
             <span class="subtitle">Traditional pizza sauce, fresh mozzarella, Roma tomatoes, fresh basil, balsamic glaze</span></li>
